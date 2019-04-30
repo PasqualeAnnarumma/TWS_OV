@@ -12,6 +12,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Admin - aggiungi utente</title>
+		<link type="text/css" rel="stylesheet" href="../css/tabella.css">
 	</head>
 	
 	<body>
@@ -28,16 +29,22 @@
 			</tr>
 			
 			<% ResultSet result = model.ricercaTuttiClienti();
-				while (result.next()) { %>
+				int i = 0;
+				String classe = "pari";
+				while (result.next()) { 
+					if (i % 2 == 0) classe = "pari";
+					else classe = "dispari";
+					i++;
+			%>
 					<tr>
-						<td><%=result.getString("CF")%></td>
-						<td><%=result.getString("Nome")%></td>
-						<td><%=result.getString("Cognome")%></td>
-						<td><%=result.getString("LuogoNascita")%></td>
-						<td><%=result.getString("dataNascita")%></td>
-						<td><%=result.getString("Telefono")%></td>
-						<td><%=result.getString("username")%></td>
-						<td>Elimina</td>
+						<td class="<%=classe%>"><%=result.getString("CF")%></td>
+						<td class="<%=classe%>"><%=result.getString("Nome")%></td>
+						<td class="<%=classe%>"><%=result.getString("Cognome")%></td>
+						<td class="<%=classe%>"><%=result.getString("LuogoNascita")%></td>
+						<td class="<%=classe%>"><%=result.getString("dataNascita")%></td>
+						<td class="<%=classe%>"><%=result.getString("Telefono")%></td>
+						<td class="<%=classe%>"><%=result.getString("username")%></td>
+						<td class="<%=classe%>">Elimina</td>
 					</tr>
 			<% } %>
 		</table>
