@@ -54,6 +54,12 @@
   	<url-pattern>/home.jsp</url-pattern>
   </filter-mapping>
   
+  <!-- DICHIARO LE PAGINE DI ERRORE -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/404.jsp</location>
+  </error-page>
+  
   <!-- DICHIARO LE VARIABILI GLOBALI -->
   <context-param>
   	<param-name>URL</param-name>

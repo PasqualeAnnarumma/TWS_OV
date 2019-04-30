@@ -16,13 +16,9 @@
 	<body>
 		<h1>Benvenuto admin <%=admin.getNome()%> <%=admin.getCognome()%></h1>
 		<ul>
-			<li><a href="<%=response.encodeURL(URL + "admin/add_user.jsp")%>">Aggiungi utente</a></li>
-			<li>Elimina utente</li>
-			<li>Modifica utente</li>
-			<li>Aggiungi auto</li>
-			<li>Rimuovi auto</li>
-			<li>Modifica auto</li>
-			<li>Visualizza entrate</li>	
+			<li><a href="<%=response.encodeURL(URL + "admin/utenti.jsp")%>">Gestisci utenti</a></li>
+			<li><a href="<%=response.encodeURL(URL + "admin/veicoli.jsp")%>">Gestisci veicoli</a></li>
+			<li><a href="<%=response.encodeURL(URL + "admin/entrate.jsp")%>">Visualizza entrate</a></li>	
 		</ul>
 		<p><a href="<%=response.encodeURL(URL + "Servlet?action=logout")%>">Logout</a></p>
 	</body>

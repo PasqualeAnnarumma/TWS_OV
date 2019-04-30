@@ -110,21 +110,47 @@ public class DbConnectionModel<T> implements Model<Cliente, WebAdmin>{
 		
 		return result;
 	}
-
-	public Cliente ricercaPerId(int id) throws SQLException {
-		return null;
-	}
-
-	public void doSave(Cliente obj) throws SQLException {
+	
+	public ResultSet ricercaTuttiVeicoli() throws SQLException {
+		ResultSet result = null;
+		Connection connection = null;
 		
-	}
-
-	public void doUpdate(Cliente obj) throws SQLException {
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "SELECT * FROM VEICOLO";
+			
+			PreparedStatement statement = connection.prepareStatement(query);
+			result = statement.executeQuery();
+		} finally {
+			try {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
 		
+		return result;
 	}
-
-	public void doDelete(Cliente obj) throws SQLException {
+	
+	public ResultSet ricercaTuttiPagamenti() throws SQLException {
+		ResultSet result = null;
+		Connection connection = null;
 		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "SELECT * FROM PAGAMENTO";
+			
+			PreparedStatement statement = connection.prepareStatement(query);
+			result = statement.executeQuery();
+		} finally {
+			try {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
+		
+		return result;
 	}
 
 }
