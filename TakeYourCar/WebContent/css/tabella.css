@@ -1,0 +1,23 @@
+@charset "ISO-8859-1";
+
+table {
+	margin-top: 10px;
+}
+
+table, th, td {
+	border: solid 2px white;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+th {
+	background-color: #0000FF;
+}
+
+.pari {
+	background-color: #007FFF;
+}
+
+.dispari {
+	background-color: #DCDCDC;
+}

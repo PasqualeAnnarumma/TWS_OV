@@ -2,14 +2,17 @@ package model;
 
 import java.io.Serializable;
 
-public class WebAdmin extends Dipendente implements Serializable{
+public class WebUser extends Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
+	private boolean admin;
 	
-	public WebAdmin() {
+	public WebUser() {
+		super();
 		username = "";
 		password = "";
+		admin = false;
 	}
 
 	public String getUsername() {
@@ -27,4 +30,13 @@ public class WebAdmin extends Dipendente implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public void setAdmin(boolean value) {
+		admin = value;
+	}
+	
+	public boolean isAdmin() {
+		return admin;
+	}
+	
 }
