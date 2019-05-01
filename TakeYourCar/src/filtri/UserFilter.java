@@ -9,8 +9,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Cliente;
-import model.WebAdmin;
+
+import model.WebUser;
 
 public class UserFilter implements Filter {
 	private String URL = "";
@@ -23,18 +23,17 @@ public class UserFilter implements Filter {
 		HttpServletRequest hrequest = (HttpServletRequest) request;
 		HttpServletResponse hresponse = (HttpServletResponse) response;
 		
-		Cliente cliente = (Cliente) hrequest.getSession().getAttribute("cliente");
-		WebAdmin admin = (WebAdmin) hrequest.getSession().getAttribute("admin");
-		if (cliente != null) {
+		WebUser utente = (WebUser) hrequest.getSession().getAttribute("utente");
+		if (utente != null && !utente.isAdmin()) {
 			chain.doFilter(hrequest, hresponse);
 			return;
-		} else if (admin != null) {
+		} else if (utente != null && utente.isAdmin()) {
 			hresponse.sendRedirect(hresponse.encodeURL(URL + "admin/admin.jsp"));
 			return;
 		}
 		
 		hrequest.getSession().setAttribute("error", "Username o password errati");
-		hresponse.sendRedirect(hresponse.encodeURL(URL + "home.jsp"));
+		hresponse.sendRedirect(hresponse.encodeURL(URL + "login.jsp"));
 	}
 
 }

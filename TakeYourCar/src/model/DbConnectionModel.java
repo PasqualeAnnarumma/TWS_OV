@@ -8,7 +8,7 @@ import java.util.Collection;
 
 import eccezioni.LoginException;
 
-public class DbConnectionModel<T> implements Model<Cliente, WebAdmin>{
+public class DbConnectionModel<T> implements Model<WebUser>{
 	private String KEY = "";
 	
 	public DbConnectionModel(String key) {
@@ -56,9 +56,9 @@ public class DbConnectionModel<T> implements Model<Cliente, WebAdmin>{
 		return utente;
 	}
 	
-	public WebAdmin selezionaAdminPerUsername(String username) throws SQLException, LoginException {
+	public WebUser selezionaAdminPerUsername(String username) throws SQLException, LoginException {
 		Connection connection = null;
-		WebAdmin admin = new WebAdmin();
+		WebUser utente = new WebUser();
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT DIPENDENTE.nome, DIPENDENTE.cognome, username," + 
@@ -71,12 +71,13 @@ public class DbConnectionModel<T> implements Model<Cliente, WebAdmin>{
 			ResultSet result = statement.executeQuery();
 			
 			while (result.next()) {
-				admin.setCF(result.getString("CF"));
-				admin.setNome(result.getString("Nome"));
-				admin.setCognome(result.getString("Cognome"));
-				admin.setUsername(result.getString("username"));
-				admin.setPassword(result.getString("password"));
-				admin.setDataNascita(result.getString("dataNascita"));
+				utente.setCF(result.getString("CF"));
+				utente.setNome(result.getString("Nome"));
+				utente.setCognome(result.getString("Cognome"));
+				utente.setUsername(result.getString("username"));
+				utente.setPassword(result.getString("password"));
+				utente.setDataNascita(result.getString("dataNascita"));
+				utente.setAdmin(true);
 			}
 		} finally {
 			try {
@@ -86,8 +87,8 @@ public class DbConnectionModel<T> implements Model<Cliente, WebAdmin>{
 			}
 		}
 	
-		if (admin == null || admin.getNome().equals("")) throw new LoginException("Username o password errati");
-		return admin;
+		if (utente == null || utente.getNome().equals("")) throw new LoginException("Username o password errati");
+		return utente;
 	}
 	
 	public ResultSet ricercaTuttiClienti() throws SQLException {

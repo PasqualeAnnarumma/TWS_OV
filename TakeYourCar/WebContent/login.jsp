@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	String error = (String) request.getSession().getAttribute("error");
+	String URL = (String) request.getServletContext().getInitParameter("URL");
 %>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,9 @@
 	</head>
 	
 	<body>
+		<header>
+			<jsp:include page="/header.jsp"></jsp:include>
+		</header>
 		<h1>Welcome!</h1>
 		<form action="<%=response.encodeURL("Servlet")%>" method="post">
 			<label for="username">Username: </label> <input type="text" name="username" placeholder="username"><br>

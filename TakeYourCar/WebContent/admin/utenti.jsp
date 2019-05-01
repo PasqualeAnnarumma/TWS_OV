@@ -16,6 +16,9 @@
 	</head>
 	
 	<body>
+		<header>
+			<jsp:include page="../header.jsp"></jsp:include>
+		</header>
 		<table>
 			<tr>
 				<th>CF</th>

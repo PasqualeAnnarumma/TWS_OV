@@ -9,8 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Cliente;
-import model.WebAdmin;
+import model.WebUser;
 
 public class AdminFilter implements Filter {
 	private String URL = "";
@@ -28,19 +27,17 @@ public class AdminFilter implements Filter {
 		HttpServletResponse hresponse = (HttpServletResponse) response;
 		//System.out.println("[ADMIN] ID: " + hrequest.getSession().getId());
 		
-		Cliente cliente = (Cliente) hrequest.getSession().getAttribute("cliente");
-		WebAdmin admin = (WebAdmin) hrequest.getSession().getAttribute("admin");
-		if (admin != null) {
-			//System.out.println("admin");
+		WebUser utente = (WebUser) hrequest.getSession().getAttribute("utente");
+		if (utente != null && utente.isAdmin()) {
 			chain.doFilter(hrequest, hresponse);
 			return;
-		} else if (cliente != null) {
+		} else if (utente != null && !utente.isAdmin()) {
 			hresponse.sendRedirect(hresponse.encodeURL(URL + "user/user.jsp"));
 			return;
 		}
 		
 		hrequest.getSession().setAttribute("error", "Username o password errati");
-		hresponse.sendRedirect(hresponse.encodeURL(URL + "home.jsp"));
+		hresponse.sendRedirect(hresponse.encodeURL(URL + "login.jsp"));
 		
 	}
 

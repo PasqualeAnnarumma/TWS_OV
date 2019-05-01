@@ -8,6 +8,7 @@ public class Dipendente extends Persona implements Serializable{
 	private String numero;
 	
 	public Dipendente() {
+		super();
 		via = "";
 		numero = "";
 	}

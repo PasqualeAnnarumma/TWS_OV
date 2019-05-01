@@ -11,17 +11,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import eccezioni.LoginException;
-import model.Cliente;
 import model.DbConnectionModel;
-import model.WebAdmin;
+import model.WebUser;
 
 public class LoginFilter implements Filter {
 	private String URL = "";
-	private DbConnectionModel<Cliente> model = null;
+	private DbConnectionModel<WebUser> model = null;
 	
 	public void init(FilterConfig fConfig) throws ServletException {
 		URL = fConfig.getServletContext().getInitParameter("URL");
-		model = new DbConnectionModel<Cliente>(fConfig.getServletContext().getInitParameter("KEY"));
+		model = new DbConnectionModel<WebUser>(fConfig.getServletContext().getInitParameter("KEY"));
 	}
 	
     public LoginFilter() {
@@ -46,49 +45,42 @@ public class LoginFilter implements Filter {
 		if (ruolo == null) ruolo = "";
 		//System.out.println("Ruolo: " + ruolo + ", username: " + username + ", password: " + pass);
 		
-		Cliente cliente = (Cliente) hrequest.getSession().getAttribute("cliente");
-		WebAdmin admin = (WebAdmin) hrequest.getSession().getAttribute("admin");
+		WebUser utente = (WebUser) hrequest.getSession().getAttribute("utente");
 		
-		if (cliente != null && !cliente.getNome().equals("")) {
+		if (utente != null && !utente.getNome().equals("")) {
 			//System.out.println("E' UN CLIENTE");
 			chain.doFilter(hrequest, hresponse);
 			return;
 		}
-		else if (admin != null && !admin.getNome().equals("")) {
-			//System.out.println("E' UN ADMIN");
-			chain.doFilter(hrequest, hresponse);
-			return;
-		}
-		else if (ruolo.equals("utente") && (cliente == null || cliente.getNome().equals(""))) {
+		else if (ruolo.equals("utente") && (utente == null || utente.getNome().equals(""))) {
 			try {
-				cliente = model.selezionaClientePerUsername(username);
-				hrequest.getSession().setAttribute("cliente", cliente);
+				utente = model.selezionaClientePerUsername(username);
+				hrequest.getSession().setAttribute("utente", utente);
 				chain.doFilter(hrequest, hresponse);
 				return;
 			} catch (SQLException | LoginException ex) {
 				hrequest.getSession().setAttribute("error", ex.getMessage());
-				hresponse.sendRedirect(hresponse.encodeURL(URL + "home.jsp"));
+				hresponse.sendRedirect(hresponse.encodeURL(URL + "login.jsp"));
 				System.err.println(ex.getMessage());
 				return;
 			}
 		}
 		
-		else if (ruolo.equals("admin") && (admin == null || admin.getNome().equals(""))) {
-			//System.out.println("--ADMIN--");
+		else if (ruolo.equals("admin") && (utente == null || utente.getNome().equals(""))) {
 			try {
-				admin = model.selezionaAdminPerUsername(username);
-				hrequest.getSession().setAttribute("admin", admin);
+				utente = model.selezionaAdminPerUsername(username);
+				hrequest.getSession().setAttribute("utente", utente);
 				chain.doFilter(hrequest, hresponse);
 				return;
 			} catch (SQLException | LoginException ex) {
 				hrequest.getSession().setAttribute("error", ex.getMessage());
-				hresponse.sendRedirect(hresponse.encodeURL(URL + "home.jsp"));
+				hresponse.sendRedirect(hresponse.encodeURL(URL + "login.jsp"));
 				System.err.println(ex.getMessage());
 				return;
 			}
 		}
 		
 		hrequest.getSession().setAttribute("error", "Username o password errati");
-		hresponse.sendRedirect(hresponse.encodeURL(URL + "home.jsp"));
+		hresponse.sendRedirect(hresponse.encodeURL(URL + "login.jsp"));
 	}
 }
