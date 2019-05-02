@@ -16,11 +16,11 @@ import model.WebUser;
 
 public class LoginFilter implements Filter {
 	private String URL = "";
-	private DbConnectionModel<WebUser> model = null;
+	private DbConnectionModel model = null;
 	
 	public void init(FilterConfig fConfig) throws ServletException {
 		URL = fConfig.getServletContext().getInitParameter("URL");
-		model = new DbConnectionModel<WebUser>(fConfig.getServletContext().getInitParameter("KEY"));
+		model = new DbConnectionModel(fConfig.getServletContext().getInitParameter("KEY"));
 	}
 	
     public LoginFilter() {

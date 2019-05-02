@@ -1,14 +1,19 @@
 package model;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.servlet.http.Part;
 
 import eccezioni.LoginException;
 
-public class DbConnectionModel<T> implements Model<WebUser>{
+public class DbConnectionModel implements Model{
 	private String KEY = "";
 	
 	public DbConnectionModel(String key) {
@@ -91,7 +96,8 @@ public class DbConnectionModel<T> implements Model<WebUser>{
 		return utente;
 	}
 	
-	public ResultSet ricercaTuttiClienti() throws SQLException {
+	public ArrayList<Cliente> ricercaTuttiClienti() throws SQLException {
+		ArrayList<Cliente> lista = new ArrayList<Cliente>();
 		ResultSet result = null;
 		Connection connection = null;
 		
@@ -101,6 +107,17 @@ public class DbConnectionModel<T> implements Model<WebUser>{
 			
 			PreparedStatement statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
+			while (result.next()) {
+				Cliente cliente = new Cliente();
+				cliente.setCF(result.getString("CF"));
+				cliente.setNome(result.getString("Nome"));
+				cliente.setCognome(result.getString("Cognome"));
+				cliente.setLuogoNascita(result.getString("LuogoNascita"));
+				cliente.setDataNascita(result.getString("dataNascita"));
+				cliente.setTelefono(result.getString("Telefono"));
+				cliente.setUsername(result.getString("username"));
+				lista.add(cliente);
+			}
 		} finally {
 			try {
 				DriverManagerConnectionPool.releaseConnection(connection);
@@ -109,10 +126,11 @@ public class DbConnectionModel<T> implements Model<WebUser>{
 			}
 		}
 		
-		return result;
+		return lista;
 	}
 	
-	public ResultSet ricercaTuttiVeicoli() throws SQLException {
+	public ArrayList<Veicolo> ricercaTuttiVeicoli() throws SQLException {
+		ArrayList<Veicolo> veicoli = new ArrayList<Veicolo>();
 		ResultSet result = null;
 		Connection connection = null;
 		
@@ -122,6 +140,14 @@ public class DbConnectionModel<T> implements Model<WebUser>{
 			
 			PreparedStatement statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
+			while (result.next()) {
+				Veicolo veicolo = new Veicolo();
+				veicolo.setTarga(result.getString("Targa"));
+				veicolo.setModello(result.getString("Modello"));
+				veicolo.setColore(result.getString("Colore"));
+				veicolo.setDeposito(result.getString("ContenutoIn"));
+				veicoli.add(veicolo);
+			}
 		} finally {
 			try {
 				DriverManagerConnectionPool.releaseConnection(connection);
@@ -130,7 +156,7 @@ public class DbConnectionModel<T> implements Model<WebUser>{
 			}
 		}
 		
-		return result;
+		return veicoli;
 	}
 	
 	public ResultSet ricercaTuttiPagamenti() throws SQLException {
@@ -152,6 +178,87 @@ public class DbConnectionModel<T> implements Model<WebUser>{
 		}
 		
 		return result;
+	}
+	
+	public Veicolo selezionaVeicoloPerTarga(String targa) throws SQLException {
+		Veicolo veicolo = new Veicolo();
+		ResultSet result = null;
+		Connection connection = null;
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "SELECT * FROM VEICOLO WHERE TARGA = ?";
+			
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, targa);
+			result = statement.executeQuery();
+			while (result.next()) {
+				veicolo.setTarga(result.getString("Targa"));
+				veicolo.setModello(result.getString("Modello"));
+				veicolo.setColore(result.getString("Colore"));
+				veicolo.setDeposito(result.getString("ContenutoIn"));
+			}
+		} finally {
+			try {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
+		
+		return veicolo;
+	}
+	
+	public void caricaImmagine(String targa, Part part) throws SQLException, IOException {
+		Connection connection = null;
+		InputStream stream = null;
+		if (part != null) stream = part.getInputStream();
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "INSERT INTO IMMAGINI VALUES (?, ?)";
+			
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, targa);
+			statement.setBlob(2, stream);
+			statement.executeUpdate();
+			connection.commit();
+		} finally {
+			try {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
+	}
+	
+	public ArrayList<Immagine> ricercaImmaginiPerTarga(String targa) throws SQLException {
+		ArrayList<Immagine> immagini = new ArrayList<Immagine>();
+		ResultSet result = null;
+		Connection connection = null;
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "SELECT * FROM IMMAGINI WHERE Targa = ?";
+			
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, targa);
+			result = statement.executeQuery();
+			while (result.next()) {
+				Immagine immagine = new Immagine();
+				immagine.setTarga(result.getString("Targa"));
+				immagine.setImmagine(result.getBlob("foto"));
+				immagini.add(immagine);
+			}
+		} finally {
+			try {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
+		
+		return immagini;
 	}
 
 }

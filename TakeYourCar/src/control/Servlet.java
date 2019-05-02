@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +37,7 @@ public class Servlet extends HttpServlet {
 		
 		if (utente != null && !utente.getNome().equals("")) {
 			response.sendRedirect(response.encodeURL(URL + "home.jsp"));
-			return;
+			return;			
 		} else {
 			response.sendRedirect(response.encodeURL(URL + "login.jsp"));
 		}

@@ -1,3 +1,5 @@
+<%@page import="model.Veicolo"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.Cliente"%>
 <%@page import="model.DbConnectionModel"%>
@@ -5,7 +7,7 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	DbConnectionModel<Cliente> model = new DbConnectionModel<Cliente>(request.getServletContext().getInitParameter("KEY"));
+	DbConnectionModel model = new DbConnectionModel(request.getServletContext().getInitParameter("KEY"));
 %>
 <!DOCTYPE html>
 <html>
@@ -28,20 +30,20 @@
 				<th>Action</th>
 			</tr>
 			
-			<% ResultSet result = model.ricercaTuttiVeicoli();
+			<% ArrayList<Veicolo> veicoli = model.ricercaTuttiVeicoli();
 			   int i = 0;
 			   String classe = "pari";
-			   while (result.next()) { 
+			   for (Veicolo v : veicoli) { 
 			   		if (i % 2 == 0) classe = "pari";
 					else classe = "dispari";
 					i++;
 			%>
 					<tr>
-						<td class="<%=classe%>"><%=result.getString("Targa")%></td>
-						<td class="<%=classe%>"><%=result.getString("Modello")%></td>
-						<td class="<%=classe%>"><%=result.getString("Colore")%></td>
-						<td class="<%=classe%>"><%=result.getString("ContenutoIn")%></td>
-						<td class="<%=classe%>">Elimina</td>
+						<td class="<%=classe%>"><%=v.getTarga()%></td>
+						<td class="<%=classe%>"><%=v.getModello()%></td>
+						<td class="<%=classe%>"><%=v.getColore()%></td>
+						<td class="<%=classe%>"><%=v.getDeposito()%></td>
+						<td class="<%=classe%>"><a href="veicolo.jsp?Targa=<%=v.getTarga()%>">Modifica</a></td>
 					</tr>
 			<% } %>
 		</table>

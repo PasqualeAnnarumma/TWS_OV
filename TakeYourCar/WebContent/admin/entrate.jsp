@@ -5,7 +5,7 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	DbConnectionModel<Cliente> model = new DbConnectionModel<Cliente>(request.getServletContext().getInitParameter("KEY"));
+	DbConnectionModel model = new DbConnectionModel(request.getServletContext().getInitParameter("KEY"));
 %>
 <!DOCTYPE html>
 <html>

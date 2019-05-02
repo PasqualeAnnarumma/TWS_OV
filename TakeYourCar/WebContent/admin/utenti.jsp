@@ -1,3 +1,5 @@
+<%@page import="model.WebUser"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.Cliente"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="model.DbConnectionModel"%>
@@ -5,7 +7,7 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	DbConnectionModel<Cliente> model = new DbConnectionModel<Cliente>(request.getServletContext().getInitParameter("KEY"));
+	DbConnectionModel model = new DbConnectionModel(request.getServletContext().getInitParameter("KEY"));
 %>
 <!DOCTYPE html>
 <html>
@@ -31,22 +33,22 @@
 				<th>Action</th>
 			</tr>
 			
-			<% ResultSet result = model.ricercaTuttiClienti();
+			<% ArrayList<Cliente> clienti = model.ricercaTuttiClienti();
 				int i = 0;
 				String classe = "pari";
-				while (result.next()) { 
+				for (Cliente cl : clienti) { 
 					if (i % 2 == 0) classe = "pari";
 					else classe = "dispari";
 					i++;
 			%>
 					<tr>
-						<td class="<%=classe%>"><%=result.getString("CF")%></td>
-						<td class="<%=classe%>"><%=result.getString("Nome")%></td>
-						<td class="<%=classe%>"><%=result.getString("Cognome")%></td>
-						<td class="<%=classe%>"><%=result.getString("LuogoNascita")%></td>
-						<td class="<%=classe%>"><%=result.getString("dataNascita")%></td>
-						<td class="<%=classe%>"><%=result.getString("Telefono")%></td>
-						<td class="<%=classe%>"><%=result.getString("username")%></td>
+						<td class="<%=classe%>"><%=cl.getCF()%></td>
+						<td class="<%=classe%>"><%=cl.getNome()%></td>
+						<td class="<%=classe%>"><%=cl.getCognome()%></td>
+						<td class="<%=classe%>"><%=cl.getLuogoNascita()%></td>
+						<td class="<%=classe%>"><%=cl.getDataNascita()%></td>
+						<td class="<%=classe%>"><%=cl.getTelefono()%></td>
+						<td class="<%=classe%>"><%=cl.getUsername()%></td>
 						<td class="<%=classe%>">Elimina</td>
 					</tr>
 			<% } %>
