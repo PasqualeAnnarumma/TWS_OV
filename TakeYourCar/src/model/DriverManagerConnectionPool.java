@@ -43,8 +43,9 @@ public class DriverManagerConnectionPool {
 			freeDbConnections.remove(0);
 
 			try {
-				if (connection.isClosed())
+				if (connection.isClosed()) {
 					connection = getConnection();
+				}
 			} catch (SQLException e) {
 				connection.close();
 				connection = getConnection();

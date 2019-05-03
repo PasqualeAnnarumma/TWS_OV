@@ -31,6 +31,7 @@
 			</tr>
 			
 			<% ArrayList<Veicolo> veicoli = model.ricercaTuttiVeicoli();
+			   request.getSession().setAttribute("veicoli", veicoli);
 			   int i = 0;
 			   String classe = "pari";
 			   for (Veicolo v : veicoli) { 
@@ -43,7 +44,7 @@
 						<td class="<%=classe%>"><%=v.getModello()%></td>
 						<td class="<%=classe%>"><%=v.getColore()%></td>
 						<td class="<%=classe%>"><%=v.getDeposito()%></td>
-						<td class="<%=classe%>"><a href="veicolo.jsp?Targa=<%=v.getTarga()%>">Modifica</a></td>
+						<td class="<%=classe%>"><a href="<%=response.encodeURL(URL + "admin/veicolo.jsp?Targa=" + v.getTarga())%>">Modifica</a></td>
 					</tr>
 			<% } %>
 		</table>

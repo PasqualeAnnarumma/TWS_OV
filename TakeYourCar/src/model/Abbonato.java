@@ -1,6 +1,9 @@
 package model;
 
-public class Abbonato {
+import java.io.Serializable;
+
+public class Abbonato implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String NTessera;
 	
 	public Abbonato() {

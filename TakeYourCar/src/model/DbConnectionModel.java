@@ -1,15 +1,11 @@
 package model;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.servlet.http.Part;
 
 import eccezioni.LoginException;
 
@@ -27,14 +23,16 @@ public class DbConnectionModel implements Model{
 	public Cliente selezionaClientePerUsername(String username) throws SQLException, LoginException {
 		ResultSet result = null;
 		Connection connection = null;
+		PreparedStatement statement = null;
 		Cliente utente = new Cliente();
+		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT CLIENTE.CF, Nome, Cognome, LuogoNascita, Telefono, dataNascita, N_CartadiCredito, username, N_tessera,"
 					+ " cast(aes_decrypt(password, \"" + KEY + "\") AS char(100)) AS password"
 					+ " FROM CLIENTE JOIN ABBONATO WHERE ABBONATO.CF = CLIENTE.CF AND username = ?";
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(query);
 			statement.setString(1, username);
 			result = statement.executeQuery();
 			
@@ -51,9 +49,15 @@ public class DbConnectionModel implements Model{
 			}
 		} finally {
 			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
+				if (statement != null) {
+					statement.close();
+				}
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 			}
 		}
 		
@@ -64,6 +68,8 @@ public class DbConnectionModel implements Model{
 	public WebUser selezionaAdminPerUsername(String username) throws SQLException, LoginException {
 		Connection connection = null;
 		WebUser utente = new WebUser();
+		PreparedStatement statement = null;
+		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT DIPENDENTE.nome, DIPENDENTE.cognome, username," + 
@@ -71,7 +77,7 @@ public class DbConnectionModel implements Model{
 					" DIPENDENTE.dataNascita, DIPENDENTE.numero, DIPENDENTE.via" + 
 					" FROM WEBADMIN JOIN DIPENDENTE WHERE DIPENDENTE.CF = WEBADMIN.CF AND username= ?";
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(query);
 			statement.setString(1, username);
 			ResultSet result = statement.executeQuery();
 			
@@ -86,9 +92,15 @@ public class DbConnectionModel implements Model{
 			}
 		} finally {
 			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
+				if (statement != null) {
+					statement.close();
+				}
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 			}
 		}
 	
@@ -100,12 +112,13 @@ public class DbConnectionModel implements Model{
 		ArrayList<Cliente> lista = new ArrayList<Cliente>();
 		ResultSet result = null;
 		Connection connection = null;
+		PreparedStatement statement = null;
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT * FROM CLIENTE";
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
 			while (result.next()) {
 				Cliente cliente = new Cliente();
@@ -120,9 +133,15 @@ public class DbConnectionModel implements Model{
 			}
 		} finally {
 			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
+				if (statement != null) {
+					statement.close();
+				}
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 			}
 		}
 		
@@ -133,12 +152,13 @@ public class DbConnectionModel implements Model{
 		ArrayList<Veicolo> veicoli = new ArrayList<Veicolo>();
 		ResultSet result = null;
 		Connection connection = null;
+		PreparedStatement statement = null;
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT * FROM VEICOLO";
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
 			while (result.next()) {
 				Veicolo veicolo = new Veicolo();
@@ -150,9 +170,15 @@ public class DbConnectionModel implements Model{
 			}
 		} finally {
 			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
+				if (statement != null) {
+					statement.close();
+				}
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 			}
 		}
 		
@@ -162,18 +188,25 @@ public class DbConnectionModel implements Model{
 	public ResultSet ricercaTuttiPagamenti() throws SQLException {
 		ResultSet result = null;
 		Connection connection = null;
+		PreparedStatement statement = null;
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT * FROM PAGAMENTO";
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(query);
 			result = statement.executeQuery();
 		} finally {
 			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
+				if (statement != null) {
+					statement.close();
+				}
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 			}
 		}
 		
@@ -184,12 +217,13 @@ public class DbConnectionModel implements Model{
 		Veicolo veicolo = new Veicolo();
 		ResultSet result = null;
 		Connection connection = null;
+		PreparedStatement statement = null;
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT * FROM VEICOLO WHERE TARGA = ?";
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(query);
 			statement.setString(1, targa);
 			result = statement.executeQuery();
 			while (result.next()) {
@@ -200,48 +234,32 @@ public class DbConnectionModel implements Model{
 			}
 		} finally {
 			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
+				if (statement != null) {
+					statement.close();
+				}
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 			}
 		}
 		
 		return veicolo;
 	}
-	
-	public void caricaImmagine(String targa, Part part) throws SQLException, IOException {
-		Connection connection = null;
-		InputStream stream = null;
-		if (part != null) stream = part.getInputStream();
 		
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			String query = "INSERT INTO IMMAGINI (Targa, foto) VALUES (?, ?)";
-			
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, targa);
-			statement.setBlob(2, stream);
-			statement.executeUpdate();
-			connection.commit();
-		} finally {
-			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			} catch (SQLException ex) {
-				System.err.println(ex.getMessage());
-			}
-		}
-	}
-	
 	public ArrayList<Immagine> ricercaImmaginiPerTarga(String targa) throws SQLException {
 		ArrayList<Immagine> immagini = new ArrayList<Immagine>();
 		ResultSet result = null;
 		Connection connection = null;
+		PreparedStatement statement = null;
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			String query = "SELECT * FROM IMMAGINI WHERE Targa = ?";
 			
-			PreparedStatement statement = connection.prepareStatement(query);
+			statement = connection.prepareStatement(query);
 			statement.setString(1, targa);
 			result = statement.executeQuery();
 			while (result.next()) {
@@ -253,41 +271,19 @@ public class DbConnectionModel implements Model{
 			}
 		} finally {
 			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
+				if (statement != null) {
+					statement.close();
+				}
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
 			}
 		}
 		
 		return immagini;
-	}
-	
-	public Immagine selezionaImmaginePerId(String ID) throws SQLException {
-		Immagine immagine = new Immagine();
-		ResultSet result = null;
-		Connection connection = null;
-		
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			String query = "SELECT * FROM IMMAGINI WHERE ID = ?";
-			
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, ID);
-			result = statement.executeQuery();
-			while (result.next()) {
-				immagine.setID(result.getString("ID"));
-				immagine.setTarga(result.getString("Targa"));
-				immagine.setImmagine(result.getBlob("foto"));
-			}
-		} finally {
-			try {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			} catch (SQLException ex) {
-				System.err.println(ex.getMessage());
-			}
-		}
-		
-		return immagine;
 	}
 
 }

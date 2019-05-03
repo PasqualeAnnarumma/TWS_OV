@@ -35,11 +35,22 @@ public class Servlet extends HttpServlet {
 		
 		WebUser utente = (WebUser) request.getSession().getAttribute("utente");
 		
-		if (utente != null && !utente.getNome().equals("")) {
-			response.sendRedirect(response.encodeURL(URL + "home.jsp"));
-			return;			
-		} else {
-			response.sendRedirect(response.encodeURL(URL + "login.jsp"));
+		if (action.equals("delete")) {
+			if (utente != null && !utente.getNome().equals("") && utente.isAdmin()) {
+				String ID = request.getParameter("ID");
+				String Targa = request.getParameter("Targa");
+				if (ID == null) ID = "";
+				if (Targa == null) Targa = "";
+					ImgServlet.rimuoviImmagine(ID);
+					response.sendRedirect(response.encodeURL(URL + "admin/veicolo.jsp?Targa=" + Targa));
+			}
+			else if (utente != null && !utente.getNome().equals("")) {
+				response.sendRedirect(response.encodeURL(URL + "home.jsp"));
+				return;			
+			}
+			else {
+				response.sendRedirect(response.encodeURL(URL + "login.jsp"));
+			}
 		}
 	}
 
