@@ -1,0 +1,100 @@
+@charset "ISO-8859-1";
+
+body {
+	background: #333;
+	magin: 0;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+	background-image: url("../img/acqua.jpg");
+	background-repeat: no-repeat;
+	background-size: cover; 
+}
+
+.container {
+	width: 360px;
+	height: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color:white;
+	text-align: center;
+	background: rgba(0,0,0,0.8);
+	border-radius: 10px;
+}
+
+.container h3 {
+	margin-top: 80px;
+	margin-bottom: 30px;
+}
+
+.box, .btn{
+	width: 260px;
+	height: 40px;
+	background: #f1f1f1b3;
+	border-radius: 10px;
+	margin: 10px auto;
+}
+
+.box input {
+	background: none;
+	border: none;
+	outline: none;
+	text-align: center;
+	width: 90%;
+	line-height: 37px;
+	font-famili: "Montserrat", sans-serif;
+	font-size: 14px;
+	color: #333;
+}
+
+.btn {
+	background: #3498db;
+	margin: 14px auto;
+	display: block;
+	font-famili: "Montserrat", sans-serif;
+	font-size: 16px;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+.b1 {
+	display: block;
+	width: 260px;
+	padding: 10px 0;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	margin: auto;
+	transition: 0.4s all;
+}
+
+.b2 {
+	position: absolute;
+	bottom: 90px;
+	left: 50px;
+	width: 260px;
+	padding: 10px 0;
+	text-decoration: none;
+	text-align: center;
+	transition: 0.4s all;
+	color: #3498db;
+	font-weight: bold;
+}
+
+a:hover {
+	background: #404040;
+}
+
+.error {
+	position: absolute;
+	color: red;
+	font-weight: bold;
+	bottom: 20px;
+	text-align: center;
+	left: 50px;
+	width: 260px;
+	padding: 10px 0;
+	transition: 0.4s all;
+}

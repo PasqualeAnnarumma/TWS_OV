@@ -44,13 +44,13 @@ public class Servlet extends HttpServlet {
 					ImgServlet.rimuoviImmagine(ID);
 					response.sendRedirect(response.encodeURL(URL + "admin/veicolo.jsp?Targa=" + Targa));
 			}
-			else if (utente != null && !utente.getNome().equals("")) {
-				response.sendRedirect(response.encodeURL(URL + "home.jsp"));
-				return;			
-			}
-			else {
-				response.sendRedirect(response.encodeURL(URL + "login.jsp"));
-			}
+		}
+		else if (utente != null && !utente.getNome().equals("")) {
+			response.sendRedirect(response.encodeURL(URL + "home.jsp"));
+			return;			
+		}
+		else {
+			response.sendRedirect(response.encodeURL(URL + "login.jsp"));
 		}
 	}
 

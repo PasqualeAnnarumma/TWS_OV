@@ -21,6 +21,5 @@
 		<% } else {%>
 			<p>Logged like user</p>
 		<% } %>
-		
 	</body>
 </html>

@@ -9,24 +9,42 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>TakeYourCar</title>
+		<link type="text/css" rel="stylesheet" href="css/login.css">
 	</head>
 	
 	<body>
 		<header>
 			<jsp:include page="/header.jsp"></jsp:include>
 		</header>
-		<h1>Welcome!</h1>
-		<form action="<%=response.encodeURL("Servlet")%>" method="post">
-			<label for="username">Username: </label> <input type="text" name="username" placeholder="username"><br>
-			<label for="password">Password: </label> <input type="password" name="password" value="xxx"><br>
-			<input type="radio" name="ruolo" value="admin" required> Admin 
-			<input type="radio" name="ruolo" value="utente" required> Utente<br>
-			<input type="submit" value="login">
+		
+		<div class="container">
+		
+			<h3>Welcome on TakeYourCar!</h3>
 			
+			<form action="<%=response.encodeURL("Servlet")%>" method="post">
+				<div class="box">
+					<input type="text" name="username" placeholder="username"><br>
+				</div>
+				
+				<div class="box">
+					<input type="password" name="password" placeholder="password"><br>
+				</div>
+				
+				<div class="radio">
+					<input type="radio" name="ruolo" value="admin" required> Admin
+					<input type="radio" name="ruolo" value="utente" required> Utente
+				</div>
+				
+				<input class="btn" type="submit" value="login">
+				
+			</form>
+			
+			<a class="b1">Password dimenticata?</a>
+			<a class="b2">Crea un account!</a>
 			<%if (error != null) { %>
-				<p style="color:red; font-weight: bold;"><%=error%></p>
-			<%  request.getSession().removeAttribute("error");
-			}%>
-		</form>
+					<p class="error"><%=error%></p>
+				<%  request.getSession().removeAttribute("error");
+				}%>
+		</div>
 	</body>
 </html>
