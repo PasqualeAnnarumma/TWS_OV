@@ -5,12 +5,22 @@ import java.sql.Blob;
 
 public class Immagine implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private String ID;
 	private String targa;
 	private Blob immagine;
 	
 	public Immagine() {
+		ID = "";
 		targa = "";
 		immagine = null;
+	}
+	
+	public String getID() {
+		return ID;
+	}
+	
+	public void setID(String id) { 
+		ID = id;
 	}
 
 	public String getTarga() {

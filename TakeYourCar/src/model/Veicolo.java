@@ -1,6 +1,9 @@
 package model;
 
-public class Veicolo {
+import java.io.Serializable;
+
+public class Veicolo implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String targa;
 	private String modello;
 	private String colore;

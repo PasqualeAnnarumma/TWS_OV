@@ -32,7 +32,7 @@
   
   <servlet>
   	<servlet-name>ImgServlet</servlet-name>
-  	<servlet-class>control.Servlet</servlet-class>
+  	<servlet-class>control.ImgServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>ImgServlet</servlet-name>

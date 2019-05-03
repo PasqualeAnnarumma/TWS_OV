@@ -30,6 +30,7 @@
 		
 		<table>
 			<tr>
+				<th>ID</th>
 				<th>Targa</th>
 				<th>Foto</th>
 				<th>Action</th>
@@ -44,8 +45,9 @@
 					i++;
 			%>
 					<tr>
+						<td class="<%=classe%>"><%=imm.getID()%></td>
 						<td class="<%=classe%>"><%=imm.getTarga()%></td>
-						<td class="<%=classe%>"><%=imm.getImmagine()%></td>
+						<td class="<%=classe%>"><img src="<%=response.encodeURL(URL + "img?ID=" + imm.getID())%>" width="150px" height="100px"></td>
 						<td class="<%=classe%>"><a href="">Elimina</a></td>
 					</tr>
 			<% } %>

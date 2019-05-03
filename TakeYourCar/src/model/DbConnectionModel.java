@@ -216,7 +216,7 @@ public class DbConnectionModel implements Model{
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
-			String query = "INSERT INTO IMMAGINI VALUES (?, ?)";
+			String query = "INSERT INTO IMMAGINI (Targa, foto) VALUES (?, ?)";
 			
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, targa);
@@ -246,6 +246,7 @@ public class DbConnectionModel implements Model{
 			result = statement.executeQuery();
 			while (result.next()) {
 				Immagine immagine = new Immagine();
+				immagine.setID(result.getString("ID"));
 				immagine.setTarga(result.getString("Targa"));
 				immagine.setImmagine(result.getBlob("foto"));
 				immagini.add(immagine);
@@ -259,6 +260,34 @@ public class DbConnectionModel implements Model{
 		}
 		
 		return immagini;
+	}
+	
+	public Immagine selezionaImmaginePerId(String ID) throws SQLException {
+		Immagine immagine = new Immagine();
+		ResultSet result = null;
+		Connection connection = null;
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "SELECT * FROM IMMAGINI WHERE ID = ?";
+			
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, ID);
+			result = statement.executeQuery();
+			while (result.next()) {
+				immagine.setID(result.getString("ID"));
+				immagine.setTarga(result.getString("Targa"));
+				immagine.setImmagine(result.getBlob("foto"));
+			}
+		} finally {
+			try {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
+		
+		return immagine;
 	}
 
 }
