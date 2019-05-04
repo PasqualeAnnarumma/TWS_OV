@@ -19,7 +19,7 @@
 		
 		<div class="container">
 		
-			<h3>Welcome on TakeYourCar!</h3>
+			<div class="titolo">Welcome on <div id="take">TakeYourCar</div> !</div> 
 			
 			<form action="<%=response.encodeURL("Servlet")%>" method="post">
 				<div class="box">
@@ -39,8 +39,8 @@
 				
 			</form>
 			
-			<a class="b1">Password dimenticata?</a>
-			<a class="b2">Crea un account!</a>
+			<a href="" class="b1">Password dimenticata?</a>
+			<a href="" class="b2">Crea un account!</a>
 			<%if (error != null) { %>
 					<p class="error"><%=error%></p>
 				<%  request.getSession().removeAttribute("error");

@@ -21,11 +21,22 @@ body {
 	text-align: center;
 	background: rgba(0,0,0,0.8);
 	border-radius: 10px;
+	box-shadow: 12px 12px 30px 1px #2d3436;
 }
 
-.container h3 {
+.container #take {
+	display: inline;
+	color: #3498db;
+}
+
+.container .titolo {
+	diplay: inline;
 	margin-top: 80px;
 	margin-bottom: 30px;
+}
+
+.titolo, #take {
+	font-size: 25px;
 }
 
 .box, .btn{
@@ -85,11 +96,12 @@ body {
 
 a:hover {
 	background: #404040;
+	border-radius: 10px;
 }
 
 .error {
 	position: absolute;
-	color: red;
+	color: #c0392b;
 	font-weight: bold;
 	bottom: 20px;
 	text-align: center;
