@@ -11,16 +11,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import eccezioni.LoginException;
-import model.DbConnectionModel;
+import model.AdminModel;
+import model.ClienteModel;
 import model.WebUser;
 
 public class LoginFilter implements Filter {
 	private String URL = "";
-	private DbConnectionModel model = null;
 	
 	public void init(FilterConfig fConfig) throws ServletException {
 		URL = fConfig.getServletContext().getInitParameter("URL");
-		model = new DbConnectionModel(fConfig.getServletContext().getInitParameter("KEY"));
 	}
 	
     public LoginFilter() {
@@ -30,7 +29,7 @@ public class LoginFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//System.out.println("LOGINFILTER");
+		System.out.println("Filtro");
 		HttpServletRequest hrequest = (HttpServletRequest) request;
 		HttpServletResponse hresponse = (HttpServletResponse) response;
 		
@@ -38,23 +37,20 @@ public class LoginFilter implements Filter {
 		String pass = (String) request.getParameter("password");
 		String ruolo = (String) request.getParameter("ruolo");
 		
-		//System.out.println("[LOGIN] ID:" + hrequest.getSession().getId());
-		
 		if (username == null) username = "";
 		if (pass == null) pass = "";
 		if (ruolo == null) ruolo = "";
-		//System.out.println("Ruolo: " + ruolo + ", username: " + username + ", password: " + pass);
 		
 		WebUser utente = (WebUser) hrequest.getSession().getAttribute("utente");
 		
 		if (utente != null && !utente.getNome().equals("")) {
-			//System.out.println("E' UN CLIENTE");
 			chain.doFilter(hrequest, hresponse);
 			return;
 		}
 		else if (ruolo.equals("utente") && (utente == null || utente.getNome().equals(""))) {
 			try {
-				utente = model.selezionaClientePerUsername(username);
+				ClienteModel model = new ClienteModel(request.getServletContext().getInitParameter("KEY"));
+				utente = model.selectByKey(username);
 				hrequest.getSession().setAttribute("utente", utente);
 				chain.doFilter(hrequest, hresponse);
 				return;
@@ -68,7 +64,8 @@ public class LoginFilter implements Filter {
 		
 		else if (ruolo.equals("admin") && (utente == null || utente.getNome().equals(""))) {
 			try {
-				utente = model.selezionaAdminPerUsername(username);
+				AdminModel model = new AdminModel(request.getServletContext().getInitParameter("KEY"));
+				utente = model.selectByKey(username);
 				hrequest.getSession().setAttribute("utente", utente);
 				chain.doFilter(hrequest, hresponse);
 				return;

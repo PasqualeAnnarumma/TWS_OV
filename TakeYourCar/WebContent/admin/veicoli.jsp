@@ -1,13 +1,18 @@
+<%@page import="model.VeicoloModel"%>
 <%@page import="model.Veicolo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="model.Cliente"%>
-<%@page import="model.DbConnectionModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	DbConnectionModel model = new DbConnectionModel(request.getServletContext().getInitParameter("KEY"));
+	@SuppressWarnings ("unchecked")
+	ArrayList<Veicolo> veicoli = (ArrayList<Veicolo>) request.getAttribute("veicoli");
+	if (veicoli == null) {
+		RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("../Servlet?redirect=admin/veicoli.jsp"));
+		disp.forward(request, response);
+		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -30,9 +35,7 @@
 				<th>Action</th>
 			</tr>
 			
-			<% ArrayList<Veicolo> veicoli = model.ricercaTuttiVeicoli();
-			   request.getSession().setAttribute("veicoli", veicoli);
-			   int i = 0;
+			<% int i = 0;
 			   String classe = "pari";
 			   for (Veicolo v : veicoli) { 
 			   		if (i % 2 == 0) classe = "pari";

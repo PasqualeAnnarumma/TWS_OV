@@ -1,11 +1,14 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Entrate"%>
+<%@page import="model.EntrateModel"%>
 <%@page import="model.Cliente"%>
-<%@page import="model.DbConnectionModel"%>
+<%@page import="model.ClienteModel"%>
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	DbConnectionModel model = new DbConnectionModel(request.getServletContext().getInitParameter("KEY"));
+	EntrateModel model = new EntrateModel();
 %>
 <!DOCTYPE html>
 <html>
@@ -28,19 +31,19 @@
 				<th>Action</th>
 			</tr>
 			
-			<% ResultSet result = model.ricercaTuttiPagamenti();
+			<% ArrayList<Entrate> entrate = model.selectAll();
 			   int i = 0;
 			   String classe = "pari";
-			   while (result.next()) { 
+			   for (Entrate e : entrate) { 
 			   	if (i % 2 == 0) classe = "pari";
 				else classe = "dispari";
 				i++;
 			%>
 					<tr>
-						<td class="<%=classe%>"><%=result.getString("Data_p")%></td>
-						<td class="<%=classe%>"><%=result.getString("Importo")%></td>
-						<td class="<%=classe%>"><%=result.getString("MetodoDiPagamento")%></td>
-						<td class="<%=classe%>"><%=result.getString("Cliente")%></td>
+						<td class="<%=classe%>"><%=e.getData()%></td>
+						<td class="<%=classe%>"><%=e.getImporto()%></td>
+						<td class="<%=classe%>"><%=e.getMetodo()%></td>
+						<td class="<%=classe%>"><%=e.getCliente()%></td>
 						<td class="<%=classe%>">Elimina</td>
 					</tr>
 			<% } %>

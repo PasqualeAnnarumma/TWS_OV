@@ -23,13 +23,29 @@ public class UploadServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String targa = request.getParameter("Targa");
+		String tabella = request.getParameter("tabella");
+		String nome = request.getParameter("Nome");
 		if (targa == null) targa  = "";
-		try {
-			Part immagine = (Part) request.getPart("file");
-			ImgServlet.caricaImmagine(targa, immagine);;
-		} catch (SQLException ex) {
-			System.err.println(ex.getMessage());
+		if (tabella == null) tabella = "";
+		if (nome == null) nome = "";
+		
+		Part immagine = (Part) request.getPart("file");
+		
+		if (tabella.equals("immagini")) {
+			try {
+				ImgServlet.caricaImmagine(targa, immagine);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
 		}
+		else if (tabella.equals("marca")) {
+			try {
+				ImgServlet.caricaMarca(nome, immagine);
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+		}
+
 		
 		response.sendRedirect(response.encodeURL(URL + "admin/veicolo.jsp?Targa=" + targa));
 	}

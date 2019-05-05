@@ -2,12 +2,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Cliente"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="model.DbConnectionModel"%>
+<%@page import="model.ClienteModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	DbConnectionModel model = new DbConnectionModel(request.getServletContext().getInitParameter("KEY"));
+	ClienteModel model = new ClienteModel(request.getServletContext().getInitParameter("KEY"));
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
 				<th>Action</th>
 			</tr>
 			
-			<% ArrayList<Cliente> clienti = model.ricercaTuttiClienti();
+			<% ArrayList<Cliente> clienti = model.selectAll();
 				int i = 0;
 				String classe = "pari";
 				for (Cliente cl : clienti) { 

@@ -39,6 +39,15 @@
   	<url-pattern>/img</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>VeicoliServlet</servlet-name>
+  	<servlet-class>control.VeicoliServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>VeicoliServlet</servlet-name>
+  	<url-pattern>/veicoli</url-pattern>
+  </servlet-mapping>
+  
   <!-- DICHIARO I FILTRI -->
   <filter>
   	<filter-name>LoginFilter</filter-name>
