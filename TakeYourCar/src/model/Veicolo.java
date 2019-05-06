@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 public class Veicolo implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private boolean auto;
 	private String targa;
 	private String modello;
 	private String colore;
@@ -15,6 +16,7 @@ public class Veicolo implements Serializable {
 		colore = "";
 		deposito = "";
 		marca = "";
+		auto = false;
 	}
 
 	public String getTarga() {
@@ -55,5 +57,13 @@ public class Veicolo implements Serializable {
 
 	public void setMarca(String marca) {
 		this.marca = marca;
+	}
+	
+	public void setAuto() {
+		auto = true;
+	}
+	
+	public boolean isAuto() {
+		return auto;
 	}
 }

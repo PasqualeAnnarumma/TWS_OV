@@ -5,85 +5,161 @@
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- DICHIARO LE SERVLET -->
+  <!-- DEFINISCO LE SERLVET -->
   <servlet>
-  	<servlet-name>Servlet</servlet-name>
-  	<servlet-class>control.Servlet</servlet-class>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>control.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>Servlet</servlet-name>
-  	<url-pattern>/Servlet</url-pattern>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>control.UploadServlet</servlet-class>
+    <!-- DEFINISCO IL MULTIPART -->
+    <multipart-config>
+      <max-file-size>10485760</max-file-size>
+      <max-request-size>20971520</max-request-size>
+      <file-size-threshold>5242880</file-size-threshold>
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/upload</url-pattern>
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>UploadServlet</servlet-name>
-  	<servlet-class>control.UploadServlet</servlet-class>
-  	<!-- DICHIARO IL MULTIPART PER LA SERVLET -->
-  	<multipart-config>
-  		<max-file-size>10485760</max-file-size>
-        <max-request-size>20971520</max-request-size>
-        <file-size-threshold>5242880</file-size-threshold>
-  	</multipart-config>
+    <servlet-name>ImgServlet</servlet-name>
+    <servlet-class>control.ImgServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UploadServlet</servlet-name>
-  	<url-pattern>/upload</url-pattern>
+    <servlet-name>ImgServlet</servlet-name>
+    <url-pattern>/img</url-pattern>
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>ImgServlet</servlet-name>
-  	<servlet-class>control.ImgServlet</servlet-class>
+    <servlet-name>VeicoliServlet</servlet-name>
+    <servlet-class>control.VeicoliServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>ImgServlet</servlet-name>
-  	<url-pattern>/img</url-pattern>
+    <servlet-name>VeicoliServlet</servlet-name>
+    <url-pattern>/veicoli</url-pattern>
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>VeicoliServlet</servlet-name>
-  	<servlet-class>control.VeicoliServlet</servlet-class>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>control.HomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>VeicoliServlet</servlet-name>
-  	<url-pattern>/veicoli</url-pattern>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
   </servlet-mapping>
   
-  <!-- DICHIARO I FILTRI -->
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>control.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>control.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/utente</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>UtentiAdmin</servlet-name>
+    <servlet-class>control.UtentiAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtentiAdmin</servlet-name>
+    <url-pattern>/utentiAdmin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>EntrateServlet</servlet-name>
+    <servlet-class>control.EntrateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EntrateServlet</servlet-name>
+    <url-pattern>/entrate</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MarcaServlet</servlet-name>
+    <servlet-class>control.MarcaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MarcaServlet</servlet-name>
+    <url-pattern>/marca</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>EditVeicolo</servlet-name>
+    <servlet-class>control.EditVeicolo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditVeicolo</servlet-name>
+    <url-pattern>/veicolo</url-pattern>
+  </servlet-mapping>
+  
+  <!-- DEFINISCO I FILTRI -->
   <filter>
-  	<filter-name>LoginFilter</filter-name>
-  	<filter-class>filtri.LoginFilter</filter-class>
+    <filter-name>JspFilter</filter-name>
+    <filter-class>filtri.JspFilter</filter-class>
   </filter>
   <filter-mapping>
-  	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>/Servlet/*</url-pattern>
-  	<url-pattern>/upload/*</url-pattern>
-  	<url-pattern>/admin/*</url-pattern>
-  	<url-pattern>/user/*</url-pattern>
-  	<url-pattern>/home.jsp</url-pattern>
+    <filter-name>JspFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
   
   <filter>
-  	<filter-name>AdminFilter</filter-name>
-  	<filter-class>filtri.AdminFilter</filter-class>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>filtri.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
-  	<filter-name>AdminFilter</filter-name>
-  	<url-pattern>/admin/*</url-pattern>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/upload/*</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
+    <url-pattern>/utente/*</url-pattern>
+    <url-pattern>/veicoli/*</url-pattern>
+    <url-pattern>/entrate/*</url-pattern>
+    <url-pattern>/marca/*</url-pattern>
+    <url-pattern>/home/*</url-pattern>
+    <url-pattern>/home.jsp</url-pattern>
   </filter-mapping>
   
-  <!-- DICHIARO LE PAGINE DI ERRORE -->
+  <filter>
+    <filter-name>AdminFilter</filter-name>
+    <filter-class>filtri.AdminFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+    
+  <!-- DEFINISCO LE PAGINE DI ERRORE -->
   <error-page>
-  	<error-code>404</error-code>
-  	<location>/error/404.jsp</location>
+    <error-code>404</error-code>
+    <location>/error/404.jsp</location>
   </error-page>
   
-  <!-- DICHIARO LE VARIABILI GLOBALI -->
+  <!-- DEFINISCO LE VARIABILI DI CONTESTO -->
   <context-param>
-  	<param-name>URL</param-name>
-  	<param-value>/TakeYourCar/</param-value>
+    <param-name>URL</param-name>
+    <param-value>/TakeYourCar/</param-value>
   </context-param>
+  
   <context-param>
-  	<param-name>KEY</param-name>
-  	<param-value>TakeYourCarKey12345</param-value>
+    <param-name>KEY</param-name>
+    <param-value>TakeYourCarKey12345</param-value>
   </context-param>
 </web-app>

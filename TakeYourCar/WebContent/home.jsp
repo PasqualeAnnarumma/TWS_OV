@@ -12,8 +12,7 @@
 	@SuppressWarnings ("unchecked")
 	ArrayList<Veicolo> veicoli = (ArrayList<Veicolo>) request.getAttribute("veicoli");
 	if (veicoli == null) {
-		RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("Servlet?redirect=home.jsp"));
-		disp.forward(request, response);
+		response.sendRedirect(response.encodeURL("home"));
 		return;
 	}
 %>
@@ -27,9 +26,9 @@
 	</head>
 	<body>
 		<header>
-			<jsp:include page="header.jsp"></jsp:include>
+			<jsp:include page="header.html"></jsp:include>
 		</header>
-		<h1>Welome on TakeYourCar!</h1>
+		<h1>Welcome on TakeYourCar!</h1>
 		<% if (utente.isAdmin()) { %>
 			<p>Logged like admin</p>
 		<% } else {%>

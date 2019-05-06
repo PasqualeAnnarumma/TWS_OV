@@ -8,15 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-
 public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String URL;
 	
-	public void init() {
-		URL = getServletContext().getInitParameter("URL");
-	}
-       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -47,6 +41,6 @@ public class UploadServlet extends HttpServlet {
 		}
 
 		
-		response.sendRedirect(response.encodeURL(URL + "admin/veicolo.jsp?Targa=" + targa));
+		response.sendRedirect(response.encodeURL("veicolo?Targa=" + targa));
 	}
 }

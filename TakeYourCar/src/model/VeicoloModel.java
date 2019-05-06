@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import eccezioni.LoginException;
 
 public class VeicoloModel implements Model<Veicolo>{
@@ -122,7 +121,75 @@ public class VeicoloModel implements Model<Veicolo>{
 		}
 	}
 	
-	public synchronized void delete(String key) {
+	public synchronized void delete(String targa) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "DELETE FROM VEICOLO WHERE Targa = ?";
+			
+			statement = connection.prepareStatement(query);
+			statement.setString(1, targa);
+			statement.executeUpdate();
+			connection.commit();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					try {
+						DriverManagerConnectionPool.releaseConnection(connection);
+					} catch (SQLException ex) {
+						System.err.println(ex.getMessage());
+					}
+				}
+			}
+		}
 		return;
+	}
+	
+	public synchronized void insert(String targa, String modello, String colore, int deposito, String marca, int copertina) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "INSERT INTO VEICOLO VALUES (?, ?, ?, ?, ?, ?)";
+			
+			statement = connection.prepareStatement(query);
+			statement.setString(1, targa);
+			statement.setString(2, modello);
+			statement.setString(3, colore);
+			statement.setInt(4, deposito);
+			statement.setString(5, marca);
+			statement.setInt(6, copertina);
+			statement.executeUpdate();
+			connection.commit();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					try {
+						DriverManagerConnectionPool.releaseConnection(connection);
+					} catch (SQLException ex) {
+						System.err.println(ex.getMessage());
+					}
+				}
+			}
+		}
 	}
 }

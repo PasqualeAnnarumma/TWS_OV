@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%
-	String URL = (String) request.getServletContext().getInitParameter("URL");
-%>
+    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,7 +9,10 @@
 	</head>
 	
 	<body>
-		<form action="<%=response.encodeURL(URL + "upload")%>" method="post" enctype="multipart/form-data">
+		<header>
+			<jsp:include page="/header.html"></jsp:include>
+		</header>
+		<form action="<%=response.encodeURL("upload")%>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="tabella" value="marca">
 			Nome: <input type="text" name="Nome"><br>
 			<input type="file" name="file" accept="image/*" required multiple><br>

@@ -14,9 +14,9 @@
 	
 	<body>
 		<header>
-			<jsp:include page="../header.jsp"></jsp:include>
+			<jsp:include page="../header.html"></jsp:include>
 		</header>
-		<h1>Benvenuto <%=utente.getNome()%> <%=utente.getCognome()%></h1>
-		<p><a href="<%=response.encodeURL(URL + "Servlet?action=logout")%>">Logout</a></p>
+		<h1 style="color:#fff;">Benvenuto <%=utente.getNome()%> <%=utente.getCognome()%></h1>
+		<p style="color:#fff;"><a href="<%=response.encodeURL(URL + "login?action=logout")%>">Logout</a></p>
 	</body>
 </html>

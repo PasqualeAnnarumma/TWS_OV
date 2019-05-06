@@ -10,8 +10,8 @@
 	int sizeAdminMenu = 1;
 	String[] menu = { "Home", "Cerca", "Area utente", "Logout"};
 	String[] adminMenu = {"Area admin"};
-	String[] percorsi = {"home.jsp", "Search", "user/user.jsp", "Servlet?action=logout"};
-	String[] percorsiAdmin = {"admin/admin.jsp"};
+	String[] percorsi = {"home", "Search", "utente", "login?action=logout"};
+	String[] percorsiAdmin = {"admin"};
 %>
 
 <!DOCTYPE html>

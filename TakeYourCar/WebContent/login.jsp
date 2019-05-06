@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
-	String error = (String) request.getSession().getAttribute("error");
+	String error = (String) request.getAttribute("error");
 	String URL = (String) request.getServletContext().getInitParameter("URL");
 %>
 <!DOCTYPE html>
@@ -13,15 +13,12 @@
 	</head>
 	
 	<body>
-		<header>
-			<jsp:include page="/header.jsp"></jsp:include>
-		</header>
 		
 		<div class="container">
 		
 			<div class="titolo">Welcome on <div id="take">TakeYourCar</div> !</div> 
 			
-			<form action="<%=response.encodeURL("Servlet")%>" method="post">
+			<form action="<%=response.encodeURL("login")%>" method="post">
 				<div class="box">
 					<input type="text" name="username" placeholder="username"><br>
 				</div>

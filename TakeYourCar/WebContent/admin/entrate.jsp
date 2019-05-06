@@ -8,19 +8,22 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	EntrateModel model = new EntrateModel();
+	@SuppressWarnings ("unchecked")
+	ArrayList<Entrate> entrate = (ArrayList<Entrate>) request.getAttribute("entrate");
+	if (entrate == null)
+		response.sendRedirect(response.encodeURL("entrate"));
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Admin - Entrate</title>
-		<link type="text/css" rel="stylesheet" href="../css/tabella.css">
+		<link type="text/css" rel="stylesheet" href="css/tabella.css">
 	</head>
 	
 	<body>
 		<header>
-			<jsp:include page="../header.jsp"></jsp:include>
+			<jsp:include page="../header.html"></jsp:include>
 		</header>
 		<table>
 			<tr>
@@ -31,8 +34,7 @@
 				<th>Action</th>
 			</tr>
 			
-			<% ArrayList<Entrate> entrate = model.selectAll();
-			   int i = 0;
+			<% int i = 0;
 			   String classe = "pari";
 			   for (Entrate e : entrate) { 
 			   	if (i % 2 == 0) classe = "pari";

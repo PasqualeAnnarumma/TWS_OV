@@ -22,17 +22,15 @@ public class AdminFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//System.out.println("ADMINFILTER");
 		HttpServletRequest hrequest = (HttpServletRequest) request;
 		HttpServletResponse hresponse = (HttpServletResponse) response;
-		//System.out.println("[ADMIN] ID: " + hrequest.getSession().getId());
 		
 		WebUser utente = (WebUser) hrequest.getSession().getAttribute("utente");
 		if (utente != null && utente.isAdmin()) {
 			chain.doFilter(hrequest, hresponse);
 			return;
 		} else if (utente != null && !utente.isAdmin()) {
-			hresponse.sendRedirect(hresponse.encodeURL(URL + "user/user.jsp"));
+			hresponse.sendRedirect(hresponse.encodeURL("utente"));
 			return;
 		}
 		

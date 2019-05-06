@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 
 body {
-	padding: 0;	
+	padding: 0;
 }
 
 .container {
@@ -74,7 +74,7 @@ body {
 }
 
 .box .content {
-	width: 90%;
+	width: 96%;
 	position: absolute;
 	top: 5px;
 	left: 5px;
@@ -85,6 +85,21 @@ body {
 	padding: 10px;
 	text-align: center;
 	border-radius: 6px;
+}
+
+.box .content .prezzo {
+	width: 60%;
+	background: #11e95b;
+	padding: 7px 20px;
+	text-align: center;
+	display: inline-block;
+	font-size: 24px;
+	font-weight: 200;
+	color: #fff;
+	border-radius: 7px;
+	margin-top: 0px;
+	margin-left: 110px;
+	box-shadow: -10px 20px 15px -10px rgb(1, 233, 91, 0.3);
 }
 
 .box .content p {
@@ -132,9 +147,4 @@ body {
 .box .content .img {
 	max-width: 100%;
 	max-height: 50%;
-}
-
-.box .content .prezzo {
-	border: 1px solid green;
-	color: green;
 }

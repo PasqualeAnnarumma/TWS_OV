@@ -15,14 +15,15 @@
 	
 	<body>
 		<header>
-			<jsp:include page="../header.jsp"></jsp:include>
+			<jsp:include page="../header.html"></jsp:include>
 		</header>
-		<h1>Benvenuto admin <%=utente.getNome()%> <%=utente.getCognome()%></h1>
+		<h1 style="color:#fff;">Benvenuto admin <%=utente.getNome()%> <%=utente.getCognome()%></h1>
 		<ul>
-			<li><a href="<%=response.encodeURL(URL + "admin/utenti.jsp")%>">Gestisci utenti</a></li>
-			<li><a href="<%=response.encodeURL(URL + "admin/veicoli.jsp")%>">Gestisci veicoli</a></li>
-			<li><a href="<%=response.encodeURL(URL + "admin/entrate.jsp")%>">Visualizza entrate</a></li>	
+			<li><a href="<%=response.encodeURL("utentiAdmin")%>">Gestisci utenti</a></li>
+			<li><a href="<%=response.encodeURL("veicoli")%>">Gestisci veicoli</a></li>
+			<li><a href="<%=response.encodeURL("entrate")%>">Visualizza entrate</a></li>
+			<li><a href="<%=response.encodeURL("marca")%>">Gestisci loghi</a></li>	
 		</ul>
-		<p><a href="<%=response.encodeURL(URL + "Servlet?action=logout")%>">Logout</a></p>
+		<p><a href="<%=response.encodeURL(URL + "login?action=logout")%>">Logout</a></p>
 	</body>
 </html>

@@ -8,13 +8,16 @@
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
 	String targa = request.getParameter("Targa");
-	if (targa == null) targa = "";
+	if (targa == null) {
+		response.sendRedirect(response.encodeURL("veicoli"));
+		return;
+	}
+	
 	@SuppressWarnings ("unchecked")
 	ArrayList<Immagine> immagini = (ArrayList<Immagine>) request.getAttribute("immagini");
 	Veicolo veicolo = (Veicolo) request.getAttribute("veicolo");
 	if (veicolo == null || immagini == null) {
-		RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("../Servlet?redirect=admin/veicolo.jsp?Targa=" + targa));
-		disp.forward(request, response);
+		response.sendRedirect(response.encodeURL("veicolo"));
 		return;
 	}
 %>
@@ -23,13 +26,13 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Admin - veicolo</title>
-		<link type="text/css" rel="stylesheet" href="../css/tabella.css">
-		<link type="text/css" rel="stylesheet" href="../css/auto.css">
+		<link type="text/css" rel="stylesheet" href="css/tabella.css">
+		<link type="text/css" rel="stylesheet" href="css/auto.css">
 	</head>
 	
 	<body>
 		<header>
-			<jsp:include page="../header.jsp"></jsp:include>
+			<jsp:include page="../header.html"></jsp:include>
 		</header>
 		<br>
 		<h1>Veicolo: <%=veicolo.getModello()%></h1>
@@ -55,8 +58,8 @@
 						<td class="<%=classe%>"><%=imm.getTarga()%></td>
 						<td class="<%=classe%>"><img class="auto" src="<%=response.encodeURL(URL + "img?ID=" + imm.getID())%>"></td>
 						<td class="<%=classe%>">
-							<a href="<%=response.encodeURL(URL + "Servlet?action=delete&ID=" + imm.getID() + "&Targa=" + imm.getTarga())%>">Elimina</a>
-							<a href="<%=response.encodeURL(URL + "Servlet?action=copertina&Targa=" + veicolo.getTarga() + "&ID=" + imm.getID())%>">Imposta copertina</a>
+							<a href="<%=response.encodeURL(URL + "veicolo?action=delete&ID=" + imm.getID() + "&Targa=" + imm.getTarga())%>">Elimina</a>
+							<a href="<%=response.encodeURL(URL + "veicolo?action=copertina&Targa=" + veicolo.getTarga() + "&ID=" + imm.getID())%>">Imposta copertina</a>
 						</td>
 					</tr>
 			<%

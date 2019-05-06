@@ -7,19 +7,22 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
-	ClienteModel model = new ClienteModel(request.getServletContext().getInitParameter("KEY"));
+	@SuppressWarnings ("unchecked")
+	ArrayList<Cliente> clienti = (ArrayList<Cliente>) request.getAttribute("clienti");
+	if (clienti == null)
+		response.sendRedirect(response.encodeURL("utentiUser"));
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Admin - aggiungi utente</title>
-		<link type="text/css" rel="stylesheet" href="../css/tabella.css">
+		<link type="text/css" rel="stylesheet" href="css/tabella.css">
 	</head>
 	
 	<body>
 		<header>
-			<jsp:include page="../header.jsp"></jsp:include>
+			<jsp:include page="../header.html"></jsp:include>
 		</header>
 		<table>
 			<tr>
@@ -33,8 +36,7 @@
 				<th>Action</th>
 			</tr>
 			
-			<% ArrayList<Cliente> clienti = model.selectAll();
-				int i = 0;
+			<%  int i = 0;
 				String classe = "pari";
 				for (Cliente cl : clienti) { 
 					if (i % 2 == 0) classe = "pari";
