@@ -120,7 +120,7 @@ nav ul li a::after{
 }
 
 .overlay{
-	background-color: rgba(0,0,0,.95);
+	background-color: rgba(0,0,0,.96);
 	position: fixed;
 	right: 0;
 	left: 0;
