@@ -9,6 +9,7 @@ public class Veicolo implements Serializable {
 	private String colore;
 	private String deposito;
 	private String marca;
+	private float prezzo;
 	
 	public Veicolo() {
 		targa = "";
@@ -17,6 +18,7 @@ public class Veicolo implements Serializable {
 		deposito = "";
 		marca = "";
 		auto = false;
+		prezzo = 0;
 	}
 
 	public String getTarga() {
@@ -65,5 +67,17 @@ public class Veicolo implements Serializable {
 	
 	public boolean isAuto() {
 		return auto;
+	}
+
+	public float getPrezzo() {
+		return prezzo;
+	}
+
+	public void setPrezzo(float prezzo) {
+		this.prezzo = prezzo;
+	}
+
+	public void setAuto(boolean auto) {
+		this.auto = auto;
 	}
 }

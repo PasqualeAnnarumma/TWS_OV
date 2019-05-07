@@ -27,6 +27,7 @@ public class VeicoloModel implements Model<Veicolo>{
 				veicolo.setModello(result.getString("Modello"));
 				veicolo.setColore(result.getString("Colore"));
 				veicolo.setDeposito(result.getString("ContenutoIn"));
+				veicolo.setPrezzo(result.getFloat("Prezzo"));
 			}
 		} finally {
 			try {
@@ -64,6 +65,7 @@ public class VeicoloModel implements Model<Veicolo>{
 				veicolo.setColore(result.getString("Colore"));
 				veicolo.setMarca(result.getString("Marca"));
 				veicolo.setDeposito(result.getString("ContenutoIn"));
+				veicolo.setPrezzo(result.getFloat("Prezzo"));
 				veicoli.add(veicolo);
 			}
 		} finally {

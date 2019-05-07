@@ -11,6 +11,8 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	position: relative;
+	overflow-x:hidden;
+	overflow-y:auto
 }
 
 a{
@@ -135,7 +137,7 @@ a{
 	transition: opacity 650ms;
 	transform: scale(0);
 	opacity: 0;
-  display: none;
+  	display: none;
 }
 
 .nav ul li a:hover::before,

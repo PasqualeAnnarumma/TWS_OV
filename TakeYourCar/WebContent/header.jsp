@@ -16,34 +16,29 @@
 
 <!DOCTYPE html>
 <html>
+
 	<head>
-		<meta charset="ISO-8859-1">
-		<title>TakeYourCar - Homepage</title>
-		<link type="text/css" rel="stylesheet" href=<%= URL + "css/header.css"%>>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/style.css">
 	</head>
-	<body>
-		<% if (utente != null) { %>
-			<div class="header">
-				<ul>
-		<% for (int i = 0; i < sizeMenu-1; i++) {
-				if (active.equals(percorsi[i])) { %>
-					<li class="active"><a href="<%=URL + percorsi[i]%>"><%=menu[i]%></a></li>
-		<% 		} else {%>
-					<li><a href="<%=URL + percorsi[i]%>"><%=menu[i]%></a></li>
-		<% 		} %>
-		<% 	}
-		   if (utente.isAdmin()) {
-		   for (int i = 0; i < sizeAdminMenu; i++) {
-		   		if (active.equals(percorsiAdmin[i])) { %>
-					<li class="active"><a href="<%=URL + percorsiAdmin[i]%>"><%=adminMenu[i]%></a></li>
-		<% 		} else {%>
-					<li><a href="<%=URL + percorsiAdmin[i]%>"><%=adminMenu[i]%></a></li>
-		<% 		} %>
-		 <% } 
-		   }%>
-					<li><a href="<%=URL + percorsi[sizeMenu-1]%>"><%=menu[sizeMenu-1]%></a></li>
-				</ul>
-			</div>
-		<%  } %>
-	</body>
+	
+	<header class="head">
+        <div class="menu-toggle" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="overlay"></div>
+        <div class="container-nav">
+            <nav class="nav">
+                <h1 class="brand"><a href="home">Take<span class="span">Your</span>Car</a></h1>
+                <ul class="lista">
+                    <li class="item"><a href="#">Cerca</a></li>
+                    <li class="item"><a href="utente">Area utente</a></li>
+                    <% if (utente.isAdmin()) { %>
+                    <li class="item"><a href="admin">Area admin</a></li>
+                    <% } %>
+                    <li class="item"><a href="login?action=logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+	</header>
 </html>

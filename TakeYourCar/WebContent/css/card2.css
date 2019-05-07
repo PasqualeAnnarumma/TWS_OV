@@ -12,6 +12,13 @@ body {
 	float: left;
 }
 
+.corpo {
+	width: 95%;
+	position: absolute;
+	left: 2%;
+	top: 150px;
+}
+
 .box {
 	position: absolute;
 	transform: translate (-50%, -50%);
@@ -93,7 +100,7 @@ body {
 	padding: 7px 20px;
 	text-align: center;
 	display: inline-block;
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: 200;
 	color: #fff;
 	border-radius: 7px;

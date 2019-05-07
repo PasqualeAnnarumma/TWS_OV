@@ -19,6 +19,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="ISO-8859-1">
 		<title>TakeYourCar - Homepage</title>
 		<!-- <link type="text/css" rel="stylesheet" href="css/card.css"> -->
@@ -26,33 +27,29 @@
 	</head>
 	<body>
 		<header>
-			<jsp:include page="header.html"></jsp:include>
+			<jsp:include page="header.jsp"></jsp:include>
 		</header>
-		<h1>Welcome on TakeYourCar!</h1>
-		<% if (utente.isAdmin()) { %>
-			<p>Logged like admin</p>
-		<% } else {%>
-			<p>Logged like user</p>
-		<% } %>
 		
-		<% for (Veicolo v : veicoli) { %>
-			<div class="container">
-				<div class="box">
-					<div class="content">
-						<img class="img" src="img?Copertina=<%=v.getTarga()%>">
-						<br>Colore: <%= v.getColore() %><br>
-						<p class="addCart">Aggiungi al carrello</p><br>
-						<p class="prezzo">EURO 100</p>
-					</div>
-					<div class="info">
-						<div class="img">
-							<img src="img?Marca=<%=v.getMarca()%>">
+		<div class="corpo">
+			<% for (Veicolo v : veicoli) { %>
+				<div class="container">
+					<div class="box">
+						<div class="content">
+							<img class="img" src="img?Copertina=<%=v.getTarga()%>">
+							<br>Colore: <%= v.getColore() %><br>
+							<p class="addCart">Aggiungi al carrello</p><br>
+							<p class="prezzo">EURO <%=v.getPrezzo()%></p>
 						</div>
-						<h3><%= v.getModello() %></h3>
+						<div class="info">
+							<div class="img">
+								<img src="img?Marca=<%=v.getMarca()%>">
+							</div>
+							<h3><%= v.getModello() %></h3>
+						</div>
 					</div>
 				</div>
-			</div>
-		<% } %>
+			<% } %>
+		</div>
 				
 		<!-- <div class="container">
 			<div class="card">
@@ -91,6 +88,6 @@
 				</div>
 			</div>
 		</div> -->
-		
+				
 	</body>
 </html>

@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="ISO-8859-1">
 		<title>TakeYourCar</title>
 		<link type="text/css" rel="stylesheet" href="css/login.css">

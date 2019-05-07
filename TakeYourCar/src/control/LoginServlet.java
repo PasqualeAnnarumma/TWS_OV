@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 		String action = request.getParameter("action");
 				
 		if (action != null && action.equals("logout")) {
-			System.out.println("Logout");
 			request.getSession().removeAttribute("cliente");
 			request.getSession().removeAttribute("admin");
 			request.getSession().removeAttribute("utente");
@@ -43,7 +42,6 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("home");
 				return;
 			} catch (SQLException | LoginException ex) {
-				System.out.println("Catch");
 				request.setAttribute("error", ex.getMessage());
 				RequestDispatcher disp = request.getRequestDispatcher("/login.jsp");
 				disp.forward(request, response);
