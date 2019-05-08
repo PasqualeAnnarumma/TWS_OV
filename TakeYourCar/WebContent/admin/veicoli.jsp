@@ -27,13 +27,13 @@
 		<header>
 			<jsp:include page="../header.jsp"></jsp:include>
 		</header>
-		<table>
+		<table class="container">
 			<tr>
 				<th>Targa</th>
 				<th>Modello</th>
 				<th>Colore</th>
 				<th>Deposito</th>
-				<th>Action</th>
+				<th colspan="2">Action</th>
 			</tr>
 			
 			<% int i = 0;
@@ -56,17 +56,19 @@
 		
 		<h3>Aggiungi veicolo</h3>
 		
-		<form class="form" action="<%=response.encodeURL("veicoli")%>" method="post">
-			<input type="hidden" name="action" value="carica">
-			Targa: <input type="text" name="targa" required><br>
-			Modello : <input type="text" name="modello" required><br>
-			Colore : <input type="text" name="colore" required><br>
-			Deposito : <input type="text" name="deposito" required><br>
-			Marca : <input type="text" name="marca" required><br>
-			Copertina : <input type="text" name="copertina" required><br>
-			Prezzo : <input type="text" name="prezzo" required><br>
-			<input type="submit" value="carica">
-		</form>
+		<div class="div-tabella">
+			<form class="form" action="<%=response.encodeURL("veicoli")%>" method="post">
+				<input type="hidden" name="action" value="carica">
+				Targa: <input type="text" name="targa" required><br>
+				Modello : <input type="text" name="modello" required><br>
+				Colore : <input type="text" name="colore" required><br>
+				Deposito : <input type="text" name="deposito" required><br>
+				Marca : <input type="text" name="marca" required><br>
+				Copertina : <input type="text" name="copertina" required><br>
+				Prezzo : <input type="text" name="prezzo" required><br>
+				<input type="submit" value="carica">
+			</form>
+		</div>
 		
 		<p><a href="<%=response.encodeURL(URL + "login?action=logout")%>">Logout</a></p>
 	</body>

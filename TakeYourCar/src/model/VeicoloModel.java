@@ -129,7 +129,6 @@ public class VeicoloModel implements Model<Veicolo, String>{
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
-			System.out.println(veicolo.getTarga());
 			String query = "DELETE FROM VEICOLO WHERE Targa = ?";
 			
 			statement = connection.prepareStatement(query);
