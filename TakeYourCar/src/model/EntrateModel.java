@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import eccezioni.LoginException;
 
-public class EntrateModel implements Model<Entrate>{
+public class EntrateModel implements Model<Entrate, String>{
 
 	public synchronized Entrate selectByKey(String key) throws SQLException, LoginException {
 		return null;
@@ -54,11 +54,15 @@ public class EntrateModel implements Model<Entrate>{
 		return null;
 	}
 	
-	public void set(String ID, String value) throws SQLException {
+	public synchronized void set(Entrate entrate) throws SQLException {
 		
 	}
 	
-	public synchronized void delete(String key) {
+	public synchronized void delete(Entrate entrate) {
+		
+	}
+	
+	public synchronized void insert(Entrate obj) throws SQLException {
 		
 	}
 

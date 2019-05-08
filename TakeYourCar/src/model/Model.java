@@ -4,11 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import eccezioni.LoginException;
 
-public interface Model<T> {
+public interface Model<T, E> {
 	
-	public T selectByKey(String key) throws SQLException, LoginException;
+	public T selectByKey(E key) throws SQLException, LoginException;
 	public ArrayList<T> selectAll() throws SQLException;
-	public ArrayList<T> searchByKey(String targa) throws SQLException;
-	public void set(String ID, String value) throws SQLException;
-	public void delete(String key) throws SQLException;
+	public ArrayList<T> searchByKey(E key) throws SQLException;
+	public void set(T obj) throws SQLException;
+	public void delete(T obj) throws SQLException;
+	public void insert(T obj) throws SQLException;
 }

@@ -44,7 +44,7 @@ public class LoginServletInutile extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ID = request.getParameter("ID");
+		/*String ID = request.getParameter("ID");
 		String Targa = request.getParameter("Targa");
 		String action = (String) request.getParameter("action");
 		String redirect = request.getParameter("redirect");
@@ -107,7 +107,7 @@ public class LoginServletInutile extends HttpServlet {
 		else {
 			response.sendRedirect(response.encodeURL(URL + "login.jsp"));
 			return;
-		}
+		}*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -125,7 +125,7 @@ public class LoginServletInutile extends HttpServlet {
 	}
 	
 	public void immagini(HttpServletRequest request, HttpServletResponse response, String targa) {
-		try {
+		/*try {
 			VeicoloModel veicoloModel = new VeicoloModel();
 			ImmagineModel imgModel = new ImmagineModel();
 			Veicolo veicolo = veicoloModel.selectByKey(targa);
@@ -134,7 +134,7 @@ public class LoginServletInutile extends HttpServlet {
 			request.setAttribute("veicolo", veicolo);
 		} catch (SQLException | LoginException ex) {
 			System.err.println(ex.getMessage());
-		}
+		}*/
 	}
 
 }

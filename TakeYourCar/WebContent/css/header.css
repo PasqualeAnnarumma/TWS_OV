@@ -1,5 +1,9 @@
 @charset "ISO-8859-1";
 
+html {
+	text-color: #fff;
+}
+
 .header {
 	padding: 0;
 	margin: -10px 0px 0px -10px;

@@ -10,14 +10,14 @@ table, th, td {
 	text-align: center;
 }
 
-th {
-	background-color: #0000FF;
-}
-
-.pari {
+tr:nth-child(odd) {
 	background-color: #007FFF;
 }
 
-.dispari {
+tr:nth-child(even) {
 	background-color: #DCDCDC;
+}
+
+th {
+	background-color: #0000FF;
 }

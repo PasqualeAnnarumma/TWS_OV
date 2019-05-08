@@ -127,14 +127,15 @@
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
-    <url-pattern>/upload/*</url-pattern>
     <url-pattern>/admin/*</url-pattern>
-    <url-pattern>/utente/*</url-pattern>
-    <url-pattern>/veicoli/*</url-pattern>
-    <url-pattern>/entrate/*</url-pattern>
-    <url-pattern>/marca/*</url-pattern>
     <url-pattern>/home/*</url-pattern>
-    <url-pattern>/home.jsp</url-pattern>
+    <url-pattern>/veicolo</url-pattern>
+    <url-pattern>/veicoli</url-pattern>
+    <url-pattern>/utentiAdmin</url-pattern>
+    <url-pattern>/entrate</url-pattern>
+    <url-pattern>/marca</url-pattern>
+    <url-pattern>/upload</url-pattern>
+    <url-pattern>/img</url-pattern>
   </filter-mapping>
   
   <filter>

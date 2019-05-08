@@ -33,7 +33,7 @@
                 <ul class="lista">
                     <li class="item"><a href="#">Cerca</a></li>
                     <li class="item"><a href="utente">Area utente</a></li>
-                    <% if (utente.isAdmin()) { %>
+                    <% if (utente != null && utente.isAdmin()) { %>
                     <li class="item"><a href="admin">Area admin</a></li>
                     <% } %>
                     <li class="item"><a href="login?action=logout">Logout</a></li>

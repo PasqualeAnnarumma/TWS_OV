@@ -20,6 +20,7 @@
 		<meta charset="ISO-8859-1">
 		<title>Admin - Auto</title>
 		<link type="text/css" rel="stylesheet" href="css/tabella.css">
+		<link type="text/css" rel="stylesheet" href="css/form.css">
 	</head>
 	
 	<body>
@@ -48,24 +49,25 @@
 						<td class="<%=classe%>"><%=v.getColore()%></td>
 						<td class="<%=classe%>"><%=v.getDeposito()%></td>
 						<td class="<%=classe%>"><a href="<%=response.encodeURL(URL + "veicolo?Targa=" + v.getTarga())%>">Modifica</a></td>
-						<td class="<%=classe%>"><a href="<%=response.encodeURL(URL + "veicolo?action=deleteVeicolo&Targa=" + v.getTarga())%>">Delete</a></td>
+						<td class="<%=classe%>"><a href="<%=response.encodeURL(URL + "veicolo?action=delete&Targa=" + v.getTarga())%>">Delete</a></td>
 					</tr>
 			<% } %>
 		</table>
 		
 		<h3>Aggiungi veicolo</h3>
 		
-		<form action="<%=response.encodeURL("veicoli")%>" method="post">
+		<form class="form" action="<%=response.encodeURL("veicoli")%>" method="post">
 			<input type="hidden" name="action" value="carica">
-			Targa: <input type="text" name="Targa"><br>
-			Modello : <input type="text" name="modello"><br>
-			Colore : <input type="text" name="colore"><br>
-			Deposito : <input type="text" name="deposito"><br>
-			Marca : <input type="text" name="marca"><br>
-			Copertina : <input type="text" name="copertina"><br>
+			Targa: <input type="text" name="targa" required><br>
+			Modello : <input type="text" name="modello" required><br>
+			Colore : <input type="text" name="colore" required><br>
+			Deposito : <input type="text" name="deposito" required><br>
+			Marca : <input type="text" name="marca" required><br>
+			Copertina : <input type="text" name="copertina" required><br>
+			Prezzo : <input type="text" name="prezzo" required><br>
 			<input type="submit" value="carica">
 		</form>
 		
-		<p><a href="<%=response.encodeURL(URL + "Servlet?action=logout")%>">Logout</a></p>
+		<p><a href="<%=response.encodeURL(URL + "login?action=logout")%>">Logout</a></p>
 	</body>
 </html>

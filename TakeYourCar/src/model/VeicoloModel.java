@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import eccezioni.LoginException;
 
-public class VeicoloModel implements Model<Veicolo>{
+public class VeicoloModel implements Model<Veicolo, String>{
 	
 	public synchronized Veicolo selectByKey(String targa) throws SQLException, LoginException {
 		Veicolo veicolo = new Veicolo();
@@ -89,7 +89,7 @@ public class VeicoloModel implements Model<Veicolo>{
 		return null;
 	}
 	
-	public synchronized void set(String numero, String targa) {
+	public synchronized void set(Veicolo veicolo) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		
@@ -98,8 +98,8 @@ public class VeicoloModel implements Model<Veicolo>{
 			String query = "UPDATE VEICOLO SET Copertina = ? WHERE Targa = ?";
 			
 			statement = connection.prepareStatement(query);
-			statement.setInt(1, Integer.parseInt(numero));
-			statement.setString(2, targa);
+			statement.setInt(1, veicolo.getCopertina());
+			statement.setString(2, veicolo.getTarga());
 			statement.executeUpdate();
 			connection.commit();
 		} catch (SQLException ex) {
@@ -123,16 +123,17 @@ public class VeicoloModel implements Model<Veicolo>{
 		}
 	}
 	
-	public synchronized void delete(String targa) {
+	public synchronized void delete(Veicolo veicolo) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
+			System.out.println(veicolo.getTarga());
 			String query = "DELETE FROM VEICOLO WHERE Targa = ?";
 			
 			statement = connection.prepareStatement(query);
-			statement.setString(1, targa);
+			statement.setString(1, veicolo.getTarga());
 			statement.executeUpdate();
 			connection.commit();
 		} catch (SQLException ex) {
@@ -157,21 +158,22 @@ public class VeicoloModel implements Model<Veicolo>{
 		return;
 	}
 	
-	public synchronized void insert(String targa, String modello, String colore, int deposito, String marca, int copertina) {
+	public synchronized void insert(Veicolo veicolo) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
-			String query = "INSERT INTO VEICOLO VALUES (?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO VEICOLO VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 			statement = connection.prepareStatement(query);
-			statement.setString(1, targa);
-			statement.setString(2, modello);
-			statement.setString(3, colore);
-			statement.setInt(4, deposito);
-			statement.setString(5, marca);
-			statement.setInt(6, copertina);
+			statement.setString(1, veicolo.getTarga());
+			statement.setString(2, veicolo.getModello());
+			statement.setString(3, veicolo.getColore());
+			statement.setString(4, veicolo.getDeposito());
+			statement.setString(5, veicolo.getMarca());
+			statement.setInt(6, veicolo.getCopertina());
+			statement.setFloat(7, veicolo.getPrezzo());
 			statement.executeUpdate();
 			connection.commit();
 		} catch (SQLException ex) {

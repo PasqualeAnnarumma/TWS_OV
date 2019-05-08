@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import eccezioni.LoginException;
 
-public class AdminModel implements Model<WebUser> {
+public class AdminModel implements Model<WebUser, String> {
 	private String KEY = "";
 	
 	public AdminModel(String key) {
@@ -65,11 +65,15 @@ public class AdminModel implements Model<WebUser> {
 		return null;
 	}
 	
-	public void set(String ID, String value) throws SQLException {
+	public synchronized void set(WebUser Admin) throws SQLException {
 		
 	}
 	
-	public synchronized void delete(String key) {
+	public synchronized void delete(WebUser admin) {
+		
+	}
+	
+	public synchronized void insert(WebUser obj) throws SQLException {
 		
 	}
 

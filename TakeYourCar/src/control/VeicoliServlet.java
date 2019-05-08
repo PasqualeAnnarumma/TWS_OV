@@ -30,8 +30,27 @@ public class VeicoliServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Ciao");
+		VeicoloModel model = new VeicoloModel();
+		String modello = (String) request.getParameter("modello");
+		String colore = (String) request.getParameter("colore");
+		String deposito = (String) request.getParameter("deposito");
+		String marca = (String) request.getParameter("marca");
+		String copertina = (String) request.getParameter("copertina");
+		String targa = (String) request.getParameter("targa");
+		String prezzo = (String) request.getParameter("prezzo");
+		
+		Veicolo veicolo = new Veicolo();
+		veicolo.setTarga(targa);
+		veicolo.setColore(colore);
+		veicolo.setCopertina(Integer.parseInt(copertina));
+		veicolo.setDeposito(deposito);
+		veicolo.setMarca(marca);
+		veicolo.setModello(modello);
+		veicolo.setPrezzo(Float.parseFloat(prezzo));
+		model.insert(veicolo);
+		
 		response.sendRedirect(response.encodeURL("veicoli"));
+		return;
 	}
 
 }

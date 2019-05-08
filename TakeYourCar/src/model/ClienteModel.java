@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import eccezioni.LoginException;
 
-public class ClienteModel implements Model<Cliente>{
+public class ClienteModel implements Model<Cliente, String>{
 	private String KEY = "";
 	
 	public ClienteModel(String key) {
@@ -103,11 +103,15 @@ public class ClienteModel implements Model<Cliente>{
 		return null;
 	}
 	
-	public void set(String ID, String value) throws SQLException {
+	public synchronized void set(Cliente cliente) throws SQLException {
 		
 	}
 	
-	public synchronized void delete(String key) {
+	public synchronized void delete(Cliente cliente) {
+		
+	}
+	
+	public synchronized void insert(Cliente obj) throws SQLException {
 		
 	}
 }
