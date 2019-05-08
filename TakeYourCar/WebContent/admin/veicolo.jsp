@@ -31,7 +31,7 @@
 		<link type="text/css" rel="stylesheet" href="css/auto.css">
 	</head>
 	
-	<body>
+	<body style="color: #fff;">
 		<header>
 			<jsp:include page="../header.jsp"></jsp:include>
 		</header>
@@ -39,7 +39,7 @@
 		<h1>Veicolo: <%=veicolo.getModello()%></h1>
 		<h3>Targa: <%=veicolo.getTarga()%> Colore: <%=veicolo.getColore()%> Deposito: <%=veicolo.getDeposito()%></h3>
 		
-		<table class="carTable">
+		<table class="container">
 			<tr>
 				<th>ID</th>
 				<th>Targa</th>
@@ -66,7 +66,7 @@
 			<%
 				} if (immagini.size() == 0) {%>
 					<tr>
-						<td class="<%=classe%>" colspan="4">Non ci sono foto</td>
+						<td class="vuoto" colspan="4">Non ci sono foto</td>
 					</tr>
 			<% } %>
 		</table>

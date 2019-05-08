@@ -25,7 +25,7 @@
 		<header>
 			<jsp:include page="../header.jsp"></jsp:include>
 		</header>
-		<table>
+		<table class="container">
 			<tr>
 				<th>CF</th>
 				<th>Nome</th>

@@ -38,6 +38,10 @@
   padding-left:2%;  
 }
 
+.container .vuoto {
+	text-align: center;
+}
+
 /* Background-color of the odd rows */
 .container tr:nth-child(odd) {
 	  background-color: #323C50;

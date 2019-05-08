@@ -28,6 +28,8 @@ public class UploadServlet extends HttpServlet {
 		if (tabella.equals("immagini")) {
 			try {
 				ImgServlet.caricaImmagine(targa, immagine);
+				response.sendRedirect(response.encodeURL("veicolo?Targa=" + targa));
+				return;
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
 			}
@@ -35,12 +37,12 @@ public class UploadServlet extends HttpServlet {
 		else if (tabella.equals("marca")) {
 			try {
 				ImgServlet.caricaMarca(nome, immagine);
+				response.sendRedirect(response.encodeURL("marca"));
+				return;
 			} catch (SQLException ex) {
 				System.err.println(ex.getMessage());
 			}
 		}
 
-		
-		response.sendRedirect(response.encodeURL("veicolo?Targa=" + targa));
 	}
 }

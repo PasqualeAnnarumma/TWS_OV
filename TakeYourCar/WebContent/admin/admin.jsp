@@ -14,7 +14,7 @@
 		<title>Admin page</title>
 	</head>
 	
-	<body>
+	<body style="color: #fff;">
 		<header>
 			<jsp:include page="../header.jsp"></jsp:include>
 		</header>
@@ -23,8 +23,13 @@
 			<li><a href="<%=response.encodeURL("utentiAdmin")%>">Gestisci utenti</a></li>
 			<li><a href="<%=response.encodeURL("veicoli")%>">Gestisci veicoli</a></li>
 			<li><a href="<%=response.encodeURL("entrate")%>">Visualizza entrate</a></li>
-			<li><a href="<%=response.encodeURL("marca")%>">Gestisci loghi</a></li>	
+			<li><a href="<%=response.encodeURL("marca")%>">Gestisci loghi</a></li>
+			<li><a href="#">Riepilogo viaggi</a></li>	
+			<li><a href="#">Gestisci dipendenti</a></li>
+			<li><a href="#">Gestisci depositia</a></li>
+			<li><a href="#">Gestisci assicurazioni</a></li>
+			<li><a href="#">Visualizza pagamenti</a></li>
+			<li><a href="#">Visualizza veicoli in noleggio</a></li>
 		</ul>
-		<p><a href="<%=response.encodeURL(URL + "login?action=logout")%>">Logout</a></p>
 	</body>
 </html>
