@@ -19,7 +19,6 @@ public class EditVeicolo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Edit veicolo");
 		String targa = request.getParameter("Targa");
 		String action = request.getParameter("action");
 		String ID = request.getParameter("ID");
@@ -34,11 +33,11 @@ public class EditVeicolo extends HttpServlet {
 			return;
 		} else if (action.equals("delete")) {
 			try {
-				Veicolo veicolo = new Veicolo();
-				veicolo = model.selectByKey(targa);
-				model.delete(veicolo);
-				RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("admin/veicolo?Targa=" + targa));
-				disp.forward(request, response);
+				Key key = new Key(targa, ID);
+				Immagine immagine = new Immagine();
+				immagine = imgModel.selectByKey(key);
+				imgModel.delete(immagine);
+				response.sendRedirect(response.encodeURL("veicolo?Targa=" + targa));
 				return;
 			} catch (SQLException | LoginException ex) {
 				System.err.println(ex.getMessage());
