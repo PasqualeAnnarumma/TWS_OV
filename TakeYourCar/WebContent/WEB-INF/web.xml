@@ -5,7 +5,7 @@
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- DEFINISCO LE SERLVET -->
+  <!-- DEFINISCO LE SERVLET -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>control.LoginServlet</servlet-class>
@@ -14,11 +14,11 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
- 
+  
   <servlet>
     <servlet-name>UploadServlet</servlet-name>
     <servlet-class>control.UploadServlet</servlet-class>
-    <!-- DEFINISCO IL MULTIPART -->
+    <!-- DEFINISCO I PARAMETRI PER L'UPLOAD -->
     <multipart-config>
       <max-file-size>10485760</max-file-size>
       <max-request-size>20971520</max-request-size>
@@ -111,7 +111,6 @@
     <url-pattern>/veicolo</url-pattern>
   </servlet-mapping>
   
-  <!-- DEFINISCO I FILTRI -->
   <filter>
     <filter-name>JspFilter</filter-name>
     <filter-class>filtri.JspFilter</filter-class>
@@ -121,6 +120,7 @@
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
   
+  <!-- DEFINISCO I FILTRI -->
   <filter>
     <filter-name>LoginFilter</filter-name>
     <filter-class>filtri.LoginFilter</filter-class>
@@ -146,14 +146,12 @@
     <filter-name>AdminFilter</filter-name>
     <url-pattern>/admin/*</url-pattern>
   </filter-mapping>
-    
-  <!-- DEFINISCO LE PAGINE DI ERRORE -->
+  
   <error-page>
     <error-code>404</error-code>
     <location>/error/404.jsp</location>
   </error-page>
   
-  <!-- DEFINISCO LE VARIABILI DI CONTESTO -->
   <context-param>
     <param-name>URL</param-name>
     <param-value>/TakeYourCar/</param-value>

@@ -19,6 +19,7 @@ public class EditVeicolo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Edit veicolo");
 		String targa = request.getParameter("Targa");
 		String action = request.getParameter("action");
 		String ID = request.getParameter("ID");
@@ -36,7 +37,7 @@ public class EditVeicolo extends HttpServlet {
 				Veicolo veicolo = new Veicolo();
 				veicolo = model.selectByKey(targa);
 				model.delete(veicolo);
-				RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("admin/veicoli.jsp"));
+				RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("admin/veicolo?Targa=" + targa));
 				disp.forward(request, response);
 				return;
 			} catch (SQLException | LoginException ex) {
