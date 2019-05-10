@@ -2,11 +2,11 @@ package model;
 
 public class Key {
 	private String targa;
-	private String key;
+	private String ID;
 	
 	public Key(String t, String k) {
 		targa = t;
-		key = k;
+		ID = k;
 	}
 
 	public String getTarga() {
@@ -18,10 +18,10 @@ public class Key {
 	}
 
 	public String getKey() {
-		return key;
+		return ID;
 	}
 
 	public void setKey(String key) {
-		this.key = key;
+		this.ID = key;
 	}
 }
