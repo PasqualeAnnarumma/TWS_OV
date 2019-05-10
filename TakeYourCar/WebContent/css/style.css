@@ -198,3 +198,26 @@ a{
   }
   
 }
+
+<!-- INIZIO COSE A CASO -->
+.city_container {
+display: table;
+margin: 20px auto;
+}
+
+
+.city_container a {
+display: table-cell;
+text-align: center;
+}
+
+.city_cointainer img {
+width: auto; 
+max-width: 100%;
+}
+
+ul#menu li {
+    display: inline;
+}
+
+<!-- FINE COSE A CASO -->s
