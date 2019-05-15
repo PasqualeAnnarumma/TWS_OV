@@ -138,9 +138,11 @@ a:hover {
 @media screen and (max-width: 850px){
 	
 	body, html {
-		min-height: 101%;
+		max-width: 90%;
+		min-height: 100%;
 	}
-		body {
+	
+	body {
 		background-image: url("../img/mobilebg.jpg");
 	}
 	
@@ -156,9 +158,10 @@ a:hover {
 /* MOBILE */
 @media screen and (max-width: 680px){
 	
-	body, html {
-		min-height: 102%;
-	}
+	/*body, html {
+		max-width: 90%;
+		min-height: 100%;
+	}*/
 	
 	.container, .shake {
 		width: 90%;
