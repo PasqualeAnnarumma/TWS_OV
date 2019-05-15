@@ -138,8 +138,8 @@ a:hover {
 @media screen and (max-width: 850px){
 	
 	body, html {
-		max-width: 90%;
 		min-height: 100%;
+		overflow-x: hidden;
 	}
 	
 	body {
@@ -160,10 +160,10 @@ a:hover {
 /* MOBILE */
 @media screen and (max-width: 414px){
 	
-	/*body, html {
-		max-width: 90%;
+	body, html {
+		max-width: 0%;
 		min-height: 100%;
-	}*/
+	}
 	
 	.container, .shake {
 		margin-top: 0px;
