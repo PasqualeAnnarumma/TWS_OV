@@ -150,13 +150,15 @@ a:hover {
 		width: 360px;
 		height: 500px;
 		position: absolute;
-		top: 25%;
-		right: 25%;
+		margin-top: -250px;
+		margin-left: -180px;
+		top: 50%;
+		left: 50%;
 	}
 }
 
 /* MOBILE */
-@media screen and (max-width: 680px){
+@media screen and (max-width: 414px){
 	
 	/*body, html {
 		max-width: 90%;
@@ -164,9 +166,12 @@ a:hover {
 	}*/
 	
 	.container, .shake {
+		margin-top: 0px;
+		margin-left: 0px;
 		width: 90%;
 		height: 500px;
 		position: absolute;
+		left: 5%;
 		top: 10%;
 		right: 5%;
 	}
