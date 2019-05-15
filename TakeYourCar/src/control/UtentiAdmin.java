@@ -26,7 +26,7 @@ public class UtentiAdmin extends HttpServlet {
 			System.err.println(ex.getMessage());
 		}
 		
-		RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("admin/utenti.jsp"));
+		RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("../admin/utenti.jsp"));
 		disp.forward(request, response);
 	}
 

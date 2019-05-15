@@ -22,7 +22,7 @@ public class EntrateServlet extends HttpServlet {
 		try {
 			entrate = model.selectAll();
 			request.setAttribute("entrate", entrate);
-			RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("admin/entrate.jsp"));
+			RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("../admin/entrate.jsp"));
 			disp.forward(request, response);
 			return;
 		} catch (SQLException ex) {

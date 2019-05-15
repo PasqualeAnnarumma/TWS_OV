@@ -29,7 +29,7 @@ public class LoginFilter implements Filter {
 			return;
 		}
 		
-		hresponse.sendRedirect(hresponse.encodeURL("login"));
+		hresponse.sendRedirect(hresponse.encodeURL("/TakeYourCar/login"));
 		
 	}
 }

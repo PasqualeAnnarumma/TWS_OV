@@ -4,7 +4,6 @@
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
-  
   <!-- DEFINISCO LE SERVLET -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
@@ -18,7 +17,7 @@
   <servlet>
     <servlet-name>UploadServlet</servlet-name>
     <servlet-class>control.UploadServlet</servlet-class>
-    <!-- DEFINISCO I PARAMETRI PER L'UPLOAD -->
+    <!-- DEFINISCO L'UPLOAD SERVLET -->
     <multipart-config>
       <max-file-size>10485760</max-file-size>
       <max-request-size>20971520</max-request-size>
@@ -27,7 +26,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
+    <url-pattern>/admin/upload</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -45,7 +44,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>VeicoliServlet</servlet-name>
-    <url-pattern>/veicoli</url-pattern>
+    <url-pattern>/admin/veicoli</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -72,7 +71,16 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UserServlet</servlet-name>
-    <url-pattern>/utente</url-pattern>
+    <url-pattern>/admin/utente</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>control.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -81,7 +89,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UtentiAdmin</servlet-name>
-    <url-pattern>/utentiAdmin</url-pattern>
+    <url-pattern>/admin/utentiAdmin</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -90,7 +98,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>EntrateServlet</servlet-name>
-    <url-pattern>/entrate</url-pattern>
+    <url-pattern>/admin/entrate</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -99,7 +107,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MarcaServlet</servlet-name>
-    <url-pattern>/marca</url-pattern>
+    <url-pattern>/admin/marca</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -108,9 +116,10 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>EditVeicolo</servlet-name>
-    <url-pattern>/veicolo</url-pattern>
+    <url-pattern>/admin/veicolo</url-pattern>
   </servlet-mapping>
   
+  <!-- DEFINISCO I FILTRI -->
   <filter>
     <filter-name>JspFilter</filter-name>
     <filter-class>filtri.JspFilter</filter-class>
@@ -120,7 +129,6 @@
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
   
-  <!-- DEFINISCO I FILTRI -->
   <filter>
     <filter-name>LoginFilter</filter-name>
     <filter-class>filtri.LoginFilter</filter-class>
@@ -129,12 +137,6 @@
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/admin/*</url-pattern>
     <url-pattern>/home/*</url-pattern>
-    <url-pattern>/veicolo</url-pattern>
-    <url-pattern>/veicoli</url-pattern>
-    <url-pattern>/utentiAdmin</url-pattern>
-    <url-pattern>/entrate</url-pattern>
-    <url-pattern>/marca</url-pattern>
-    <url-pattern>/upload</url-pattern>
     <url-pattern>/img</url-pattern>
   </filter-mapping>
   

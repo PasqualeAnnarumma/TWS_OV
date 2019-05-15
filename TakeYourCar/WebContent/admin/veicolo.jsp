@@ -27,8 +27,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="ISO-8859-1">
 		<title>Admin - veicolo</title>
-		<link type="text/css" rel="stylesheet" href="css/tabella.css">
-		<link type="text/css" rel="stylesheet" href="css/auto.css">
+		<link type="text/css" rel="stylesheet" href="../css/tabella.css">
+		<link type="text/css" rel="stylesheet" href="../css/auto.css">
 	</head>
 	
 	<body style="color: #fff;">
@@ -59,8 +59,8 @@
 						<td class="<%=classe%>"><%=imm.getTarga()%></td>
 						<td class="<%=classe%>"><img class="auto" src="<%=response.encodeURL(URL + "img?ID=" + imm.getID())%>"></td>
 						<td class="<%=classe%>">
-							<a href="<%=response.encodeURL(URL + "veicolo?action=delete&ID=" + imm.getID() + "&Targa=" + imm.getTarga())%>">Elimina</a>
-							<a href="<%=response.encodeURL(URL + "veicolo?action=copertina&Targa=" + veicolo.getTarga() + "&ID=" + imm.getID())%>">Imposta copertina</a>
+							<a href="<%=response.encodeURL("../img?action=delete&ID=" + imm.getID() + "&Targa=" + imm.getTarga())%>">Elimina</a>
+							<a href="<%=response.encodeURL("veicolo?action=copertina&Targa=" + veicolo.getTarga() + "&ID=" + imm.getID())%>">Imposta copertina</a>
 						</td>
 					</tr>
 			<%
@@ -72,7 +72,7 @@
 		</table>
 				
 		<br>
-		<form action="<%=response.encodeURL(URL + "upload")%>" method="post" enctype="multipart/form-data">
+		<form action="<%=response.encodeURL("upload")%>" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="tabella" value="immagini">
 			<input type="hidden" name="Targa" value="<%=veicolo.getTarga()%>">
 			<input type="file" name="file" accept="image/*" required multiple>

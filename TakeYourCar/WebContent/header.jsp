@@ -19,7 +19,7 @@
 
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href=<%= URL + "css/style.css" %>>
 	</head>
 	
 	<header class="head">
@@ -29,14 +29,14 @@
         <div class="overlay"></div>
         <div class="container-nav">
             <nav class="nav">
-                <h1 class="brand"><a href="home">Take<span class="span">Your</span>Car</a></h1>
+                <h1 class="brand"><a href="<%= request.getContextPath() + "/home" %>">Take<span class="span">Your</span>Car</a></h1>
                 <ul class="lista">
                     <li class="item"><a href="#">Cerca</a></li>
-                    <li class="item"><a href="utente">Area utente</a></li>
+                    <li class="item"><a href="<%= request.getContextPath() + "/admin/utente"%>">Area utente</a></li>
                     <% if (utente != null && utente.isAdmin()) { %>
-                    <li class="item"><a href="admin">Area admin</a></li>
+                    <li class="item"><a href="<%= request.getContextPath() + "/admin"%>">Area admin</a></li>
                     <% } %>
-                    <li class="item"><a href="login?action=logout">Logout</a></li>
+                    <li class="item"><a href=<%= request.getContextPath() + "/login?action=logout"%>>Logout</a></li>
                 </ul>
             </nav>
         </div>
