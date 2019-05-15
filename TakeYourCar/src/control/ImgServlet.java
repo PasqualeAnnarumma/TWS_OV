@@ -13,12 +13,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import eccezioni.LoginException;
 import model.DriverManagerConnectionPool;
+import model.Immagine;
+import model.ImmagineModel;
+import model.Key;
 
 public class ImgServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String URL = "";
 	
 	public void init(ServletConfig config) throws ServletException {
+		URL = (String) config.getServletContext().getInitParameter("URL");
 		super.init(config);
 	}
 
@@ -27,8 +34,23 @@ public class ImgServlet extends HttpServlet {
 		String marca = request.getParameter("Marca");
 		String copertina = request.getParameter("Copertina");
 		String ID = request.getParameter("ID");
+		String action = request.getParameter("action");
+		String targa = request.getParameter("Targa");
+		if (action == null) action = "";
 		
-		if (marca != null) {
+		if (action.equals("delete")) {
+			try {
+				ImmagineModel imgModel = new ImmagineModel();
+				Key key = new Key(targa, ID);
+				Immagine immagine = new Immagine();
+				immagine = imgModel.selectByKey(key);
+				imgModel.delete(immagine);
+				response.sendRedirect(response.encodeURL(URL + "admin/veicolo?Targa=" + targa));
+				return;
+			} catch (SQLException | LoginException ex) {
+				System.err.println(ex.getMessage());
+			}
+		} else if (marca != null) {
 			buffer = ImgServlet.cercaLogo(marca);
 		}
 		else if (copertina != null) {

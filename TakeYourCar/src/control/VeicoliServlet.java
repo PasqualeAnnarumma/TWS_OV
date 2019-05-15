@@ -3,7 +3,6 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +24,7 @@ public class VeicoliServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("veicoli", veicoli);
-		RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("admin/veicoli.jsp"));
+		RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("/admin/veicoli.jsp"));
 		disp.forward(request, response);
 	}
 
@@ -49,7 +48,7 @@ public class VeicoliServlet extends HttpServlet {
 		veicolo.setPrezzo(Float.parseFloat(prezzo));
 		model.insert(veicolo);
 		
-		response.sendRedirect(response.encodeURL("veicoli"));
+		response.sendRedirect(response.encodeURL(request.getContextPath() + "/admin/veicoli"));
 		return;
 	}
 

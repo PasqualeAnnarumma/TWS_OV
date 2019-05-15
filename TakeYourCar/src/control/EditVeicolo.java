@@ -29,15 +29,13 @@ public class EditVeicolo extends HttpServlet {
 		ImmagineModel imgModel = new ImmagineModel();
 		
 		if (targa == null) {
-			response.sendRedirect(response.encodeURL("veicoli"));
+			response.sendRedirect(response.encodeURL("admin/veicoli"));
 			return;
 		} else if (action.equals("delete")) {
 			try {
-				Key key = new Key(targa, ID);
-				Immagine immagine = new Immagine();
-				immagine = imgModel.selectByKey(key);
-				imgModel.delete(immagine);
-				response.sendRedirect(response.encodeURL("veicolo?Targa=" + targa));
+				Veicolo veicolo = model.selectByKey(targa);
+				model.delete(veicolo);
+				response.sendRedirect(response.encodeURL("veicoli"));
 				return;
 			} catch (SQLException | LoginException ex) {
 				System.err.println(ex.getMessage());
@@ -60,7 +58,7 @@ public class EditVeicolo extends HttpServlet {
 			request.setAttribute("Targa", targa);
 			request.setAttribute("veicolo", veicolo);
 			request.setAttribute("immagini", immagini);
-			RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("admin/veicolo.jsp"));
+			RequestDispatcher disp = request.getRequestDispatcher(response.encodeURL("/admin/veicolo.jsp"));
 			disp.forward(request, response);
 			return;
 		} catch (SQLException | LoginException ex) {

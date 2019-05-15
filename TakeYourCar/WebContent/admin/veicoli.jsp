@@ -19,8 +19,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="ISO-8859-1">
 		<title>Admin - Auto</title>
-		<link type="text/css" rel="stylesheet" href="css/tabella.css">
-		<link type="text/css" rel="stylesheet" href="css/form.css">
+		<link type="text/css" rel="stylesheet" href="../css/tabella.css">
+		<link type="text/css" rel="stylesheet" href="../css/form.css">
 	</head>
 	
 	<body>
@@ -48,8 +48,8 @@
 						<td class="<%=classe%>"><%=v.getModello()%></td>
 						<td class="<%=classe%>"><%=v.getColore()%></td>
 						<td class="<%=classe%>"><%=v.getDeposito()%></td>
-						<td class="<%=classe%>"><a href="<%=response.encodeURL(URL + "veicolo?Targa=" + v.getTarga())%>">Modifica</a></td>
-						<td class="<%=classe%>"><a href="<%=response.encodeURL(URL + "veicolo?action=delete&Targa=" + v.getTarga())%>">Delete</a></td>
+						<td class="<%=classe%>"><a href="<%=response.encodeURL(request.getContextPath() + "/admin/veicolo?Targa=" + v.getTarga())%>">Modifica</a></td>
+						<td class="<%=classe%>"><a href="<%=response.encodeURL(request.getContextPath() + "/admin/veicolo?action=delete&Targa=" + v.getTarga())%>">Delete</a></td>
 					</tr>
 			<% } %>
 		</table>

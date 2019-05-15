@@ -3,6 +3,8 @@
 <%
 	String error = (String) request.getAttribute("error");
 	String URL = (String) request.getServletContext().getInitParameter("URL");
+	String classe = "container";
+	if (error != null) classe = "shake";
 %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +17,7 @@
 	
 	<body>
 		
-		<div class="container">
+		<div class="<%=classe%>">
 		
 			<div class="titolo">Welcome on <div id="take">TakeYourCar</div> !</div> 
 			

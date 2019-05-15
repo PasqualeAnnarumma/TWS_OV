@@ -20,10 +20,10 @@
 		</header>
 		<h1 style="color:#fff;">Benvenuto admin <%=utente.getNome()%> <%=utente.getCognome()%></h1>
 		<ul>
-			<li><a href="<%=response.encodeURL("utentiAdmin")%>">Gestisci utenti</a></li>
-			<li><a href="<%=response.encodeURL("veicoli")%>">Gestisci veicoli</a></li>
-			<li><a href="<%=response.encodeURL("entrate")%>">Visualizza entrate</a></li>
-			<li><a href="<%=response.encodeURL("marca")%>">Gestisci loghi</a></li>
+			<li><a href="<%=response.encodeURL("admin/utentiAdmin")%>">Gestisci utenti</a></li>
+			<li><a href="<%=response.encodeURL("admin/veicoli")%>">Gestisci veicoli</a></li>
+			<li><a href="<%=response.encodeURL("admin/entrate")%>">Visualizza entrate</a></li>
+			<li><a href="<%=response.encodeURL("admin/marca")%>">Gestisci loghi</a></li>
 			<li><a href="#">Riepilogo viaggi</a></li>	
 			<li><a href="#">Gestisci dipendenti</a></li>
 			<li><a href="#">Gestisci depositia</a></li>
