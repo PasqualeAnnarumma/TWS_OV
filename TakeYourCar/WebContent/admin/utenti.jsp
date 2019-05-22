@@ -7,6 +7,8 @@
     pageEncoding="ISO-8859-1"%>
 <%
 	String URL = (String) request.getServletContext().getInitParameter("URL");
+	String error = (String) request.getSession().getAttribute("error");
+	request.getSession().removeAttribute("error");
 	@SuppressWarnings ("unchecked")
 	ArrayList<Cliente> clienti = (ArrayList<Cliente>) request.getAttribute("clienti");
 	if (clienti == null) {
@@ -27,6 +29,11 @@
 		<header>
 			<jsp:include page="../header.jsp"></jsp:include>
 		</header>
+		
+		<% if (error != null) { %>
+			<p id="error"><%=error%></p>
+		<% } %>
+		
 		<table class="container">
 			<tr>
 				<th>CF</th>
@@ -54,7 +61,7 @@
 						<td class="<%=classe%>"><%=cl.getDataNascita()%></td>
 						<td class="<%=classe%>"><%=cl.getTelefono()%></td>
 						<td class="<%=classe%>"><%=cl.getUsername()%></td>
-						<td class="<%=classe%>">Elimina</td>
+						<td class="<%=classe%>"><a href="utente?action=delete&username=<%=cl.getUsername()%>">Elimina</a></td>
 					</tr>
 			<% } %>
 		</table>
@@ -63,14 +70,16 @@
 		<fieldset>
 			<legend>Aggiungi</legend>
 			<form method="post" action="../register">
-				CF: <input type="text" name="CF"><br>
-				Nome: <input type="text" name="Nome"><br>
-				Cognome: <input type="text" name="Cognome"><br>
-				Nato a: <input type="text" name="Nato"><br>
-				Nato il: <input type="text" name="Compleanno"><br>
-				Telefono: <input type="text" name="Telefono"><br>
-				Username: <input type="text" name="Username"><br>
-				Passwrod: <input type="password" name="Password"><br>
+				CF: <input type="text" name="cf"><br>
+				Nome: <input type="text" name="nome"><br>
+				Cognome: <input type="text" name="cognome"><br>
+				Nato a: <input type="text" name="luogo_nascita"><br>
+				Nato il: <input type="text" name="data_nascita"><br>
+				Telefono: <input type="text" name="telefono"><br>
+				Carta: <input type="number" name="carta"><br>
+				Username: <input type="text" name="username"><br>
+				Passwrod: <input type="password" name="password"><br>
+				Email: <input type="email" name="email"><br>
 				<input type="submit" value="registra">
 			</form>
 		</fieldset>

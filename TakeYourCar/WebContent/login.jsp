@@ -4,6 +4,7 @@
 	String error = (String) request.getAttribute("error");
 	String URL = (String) request.getServletContext().getInitParameter("URL");
 	String classe = "container";
+	String success = (String) request.getSession().getAttribute("success");
 	if (error != null) classe = "shake";
 %>
 <!DOCTYPE html>
@@ -40,11 +41,14 @@
 			</form>
 			
 			<a href="" class="b1">Password dimenticata?</a>
-			<a href="" class="b2">Crea un account!</a>
+			<a href="register" class="b2">Crea un account!</a>
 			<%if (error != null) { %>
 					<p class="error"><%=error%></p>
-				<%  request.getSession().removeAttribute("error");
-				}%>
+				<%request.getSession().removeAttribute("error"); %>
+			<%} else if (success != null) { %>
+				<p class="success"><%=success%></p>
+				<%request.getSession().removeAttribute("success"); %>
+			<%} %>
 		</div>
 	</body>
 </html>

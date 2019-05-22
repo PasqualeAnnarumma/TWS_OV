@@ -99,7 +99,7 @@ public class ClienteModel implements Model<Cliente, String>{
 		return lista;
 	}
 	
-	public synchronized ArrayList<Cliente> searchByKey(String targa) throws SQLException {
+	public synchronized ArrayList<Cliente> searchByKey(String username) throws SQLException {
 		return null;
 	}
 	
@@ -107,11 +107,73 @@ public class ClienteModel implements Model<Cliente, String>{
 		
 	}
 	
-	public synchronized void delete(Cliente cliente) {
+	public synchronized void delete(Cliente cliente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
 		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "DELETE FROM CLIENTE WHERE username = ?";
+			
+			statement = connection.prepareStatement(query);
+			statement.setString(1, cliente.getUsername());
+			statement.executeUpdate();
+			connection.commit();
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
+			}
+		}
 	}
 	
-	public synchronized void insert(Cliente obj) throws SQLException {
+	public synchronized void insert(Cliente c) throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		PreparedStatement statement2 = null;
 		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			String query = "INSERT INTO CLIENTE VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, aes_encrypt(?, \"" + KEY + "\"))";
+			String query2 = "INSERT INTO ABBONATO (CF) VALUES (?)";
+			
+			statement = connection.prepareStatement(query);
+			statement.setString(1, c.getCF());
+			statement.setString(2, c.getNome());
+			statement.setString(3, c.getCognome());
+			statement.setString(4, c.getLuogoNascita());
+			statement.setString(5, c.getTelefono());
+			statement.setString(6, c.getDataNascita());
+			statement.setString(7, c.getCartadiCredito());
+			statement.setString(8, c.getEmail());
+			statement.setString(9, c.getUsername());
+			statement.setString(10, c.getPassword());
+			statement.executeUpdate();
+			connection.commit();
+			
+			statement2 = connection.prepareStatement(query2);
+			statement2.setString(1, c.getCF());
+			statement2.executeUpdate();
+			connection.commit();
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			} finally {
+				if (connection != null) {
+					DriverManagerConnectionPool.releaseConnection(connection);
+				}
+			}
+		}
 	}
 }

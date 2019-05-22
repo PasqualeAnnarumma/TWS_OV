@@ -6,12 +6,14 @@ public class WebUser extends Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
+	private String email;
 	private boolean admin;
 	
 	public WebUser() {
 		super();
 		username = "";
 		password = "";
+		email = "";
 		admin = false;
 	}
 
@@ -37,6 +39,14 @@ public class WebUser extends Persona implements Serializable {
 	
 	public boolean isAdmin() {
 		return admin;
+	}
+	
+	public void setEmail(String e) {
+		email = e;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 	
 }
