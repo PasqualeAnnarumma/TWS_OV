@@ -1,9 +1,22 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/header.css">
 
+<style>
+	#img {
+		display: none;
+	}
+</style>
+
+<script>
+	function visible() {
+		var img = document.getElementById("img");
+		img.style.display = "inline";
+	}
+</script>
+
 <header class="head">
         <div class="menu-toggle" id="hamburger">
-            <i class="fas fa-bars"></i>
+            <div class="icona"></div>
         </div>
         <div class="overlay"></div>
         <div class="container-nav">
@@ -17,4 +30,6 @@
                 </ul>
             </nav>
         </div>
+        <input type="button" onclick="visible()" value="vai"><br>
+        <img id="img" src="img/ingranaggi.gif" width="100px"><br>
 </header>

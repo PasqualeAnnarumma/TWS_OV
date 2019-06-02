@@ -156,13 +156,17 @@ a{
 	}
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 1020px){
 
 	.menu-toggle{
 		display: block;
 	}
+	
+	.menu-toggle .icona {
+		background-image:src("img/menu.png");
+	}
 
-	.nav{
+	.nav .brand .lista{
 		padding-top: 0;
 		display: none;
 		flex-direction: column;

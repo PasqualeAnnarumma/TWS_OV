@@ -49,4 +49,8 @@ public class WebUser extends Persona implements Serializable {
 		return email;
 	}
 	
+	public String toString() {
+		return "username : " + username;
+	}
+	
 }
