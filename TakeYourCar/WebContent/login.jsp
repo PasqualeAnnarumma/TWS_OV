@@ -19,27 +19,20 @@
 		<script src="js/login.js" type="text/javascript"></script>
 		<script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
 		
-		<script>
-			/*function loginCall(username, password, admin, utente) {
-				var ruolo = "admin";
-				if (!admin.checked) ruolo = "utente";
-				alert("admin : " + admin.checked + ", utente : " + utente.checked + ", ruolo : " + ruolo);
-				alert(validateLogin(username, password, admin.checked, ruolo));
-				return false;
-			}*/
-			
+		<script>			
 			function handler(xml) {
-				alert("Invocazione " + xml.readyState);
 				//se lo stato è quello finale e non ci sono errori
 				if (xml.readyState == 4 && xml.status == 200) {
-					var obj = JSON.parse(xml.responseText);
-					console.log(obj);
-					if (obj == null) {
-						alert("Vuoto");
-						return false;
-					} else {
-						alert("non vuoto");
-						return true;
+					try {
+						//converto il JSON in oggetto
+						var obj = JSON.parse(xml.responseText);
+						//faccio il redirect alla pagina di home
+						$(window.location).attr("href", "home");
+					} catch(ex) {
+						//aggiungo la classe che serve per fare lo shake della form
+						$("#contenitore").addClass("shake");
+						//imposto il messaggo di errore
+						$(".error").html("Username o password errati");
 					}
 				}
 			}
@@ -69,7 +62,7 @@
 				<!-- <input class="btn" type="submit" value="login"> -->
 			</form>
 			
-			<input class="btn" type="submit" value="login" onclick="validateLogin(document.getElementById('username').value, document.getElementById('password').value, document.getElementById('admin'), document.getElementById('utente'))">
+			<input class="btn" type="submit" value="login" onclick="validateLogin(document.getElementById('username').value, document.getElementById('password').value, handler, document.getElementById('admin'), document.getElementById('utente'))">
 			
 			<a href="" class="b1">Password dimenticata?</a>
 			<a href="register" class="b2">Crea un account!</a>
